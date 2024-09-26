@@ -1,0 +1,123 @@
+2024-09-20 15:24:00,432 DEBUG - Starting WinSW in console mode
+2024-09-20 15:24:04,450 DEBUG - Starting WinSW in console mode
+2024-09-20 15:24:04,495 INFO  - Uninstalling service 'ATM Stack PHP (powered by WinSW) (atmstack-php)'...
+2024-09-20 15:24:04,503 WARN  - Service 'ATM Stack PHP (powered by WinSW) (atmstack-php)' is started. It may be impossible to uninstall it.
+2024-09-20 15:24:04,505 INFO  - Service 'ATM Stack PHP (powered by WinSW) (atmstack-php)' was uninstalled successfully.
+2024-09-20 15:26:26,171 DEBUG - Starting WinSW in console mode
+2024-09-20 15:26:28,288 DEBUG - Starting WinSW in console mode
+2024-09-20 15:26:28,332 INFO  - Installing service 'ATM Stack PHP (powered by WinSW) (atmstack-php)'...
+2024-09-20 15:26:28,364 INFO  - Service 'ATM Stack PHP (powered by WinSW) (atmstack-php)' was installed successfully.
+2024-09-20 15:26:55,717 DEBUG - Starting WinSW in console mode
+2024-09-20 15:26:55,768 FATAL - Unhandled exception
+System.Exception: Unknown command: un
+   at WinSW.Program.Run(String[] argsArray, IServiceConfig config)
+   at WinSW.Program.Main(String[] args)
+2024-09-20 15:27:09,792 DEBUG - Starting WinSW in console mode
+2024-09-20 15:27:11,654 DEBUG - Starting WinSW in console mode
+2024-09-20 15:27:11,699 INFO  - Uninstalling service 'ATM Stack PHP (powered by WinSW) (atmstack-php)'...
+2024-09-20 15:27:11,708 INFO  - Service 'ATM Stack PHP (powered by WinSW) (atmstack-php)' was uninstalled successfully.
+2024-09-20 15:28:03,944 DEBUG - Starting WinSW in console mode
+2024-09-20 15:28:06,153 DEBUG - Starting WinSW in console mode
+2024-09-20 15:28:06,197 INFO  - Installing service 'ATM Stack PHP (powered by WinSW) (svc-php)'...
+2024-09-20 15:28:06,258 INFO  - Service 'ATM Stack PHP (powered by WinSW) (svc-php)' was installed successfully.
+2024-09-20 15:28:12,890 DEBUG - Starting WinSW in service mode
+2024-09-20 15:28:13,085 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 15:28:13,115 INFO  - Started process 1000
+2024-09-20 15:28:13,127 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 15:45:32,268 INFO  - Stopping svc-php
+2024-09-20 15:45:32,274 INFO  - Started process 2400
+2024-09-20 15:45:32,278 DEBUG - WaitForProcessToExit 1000+2400
+2024-09-20 15:45:32,375 INFO  - Finished svc-php
+2024-09-20 15:45:34,650 DEBUG - Starting WinSW in service mode
+2024-09-20 15:45:34,848 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 15:45:34,881 INFO  - Started process 3316
+2024-09-20 15:45:34,893 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:06:58,420 INFO  - Stopping svc-php
+2024-09-20 16:06:58,423 INFO  - Started process 4700
+2024-09-20 16:06:58,425 DEBUG - WaitForProcessToExit 3316+4700
+2024-09-20 16:06:58,472 INFO  - Finished svc-php
+2024-09-20 16:07:00,157 DEBUG - Starting WinSW in service mode
+2024-09-20 16:07:00,351 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:07:00,381 INFO  - Started process 3268
+2024-09-20 16:07:00,395 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:19:42,874 INFO  - Stopping svc-php
+2024-09-20 16:19:42,877 INFO  - Started process 4828
+2024-09-20 16:19:42,879 DEBUG - WaitForProcessToExit 3268+4828
+2024-09-20 16:19:42,980 INFO  - Finished svc-php
+2024-09-20 16:19:44,638 DEBUG - Starting WinSW in service mode
+2024-09-20 16:19:44,861 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:19:44,891 INFO  - Started process 4104
+2024-09-20 16:19:44,903 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:21:29,223 INFO  - Stopping svc-php
+2024-09-20 16:21:29,226 INFO  - Started process 3452
+2024-09-20 16:21:29,228 DEBUG - WaitForProcessToExit 4104+3452
+2024-09-20 16:21:29,459 INFO  - Finished svc-php
+2024-09-20 16:21:38,650 DEBUG - Starting WinSW in service mode
+2024-09-20 16:21:38,856 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:21:38,890 INFO  - Started process 4736
+2024-09-20 16:21:38,912 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:23:01,498 INFO  - Stopping svc-php
+2024-09-20 16:23:01,502 INFO  - Started process 2092
+2024-09-20 16:23:01,503 DEBUG - WaitForProcessToExit 4736+2092
+2024-09-20 16:23:01,562 INFO  - Finished svc-php
+2024-09-20 16:23:03,288 DEBUG - Starting WinSW in service mode
+2024-09-20 16:23:03,501 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:23:03,534 INFO  - Started process 3288
+2024-09-20 16:23:03,554 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:26:45,504 INFO  - Stopping svc-php
+2024-09-20 16:26:45,507 INFO  - Started process 1304
+2024-09-20 16:26:45,509 DEBUG - WaitForProcessToExit 3288+1304
+2024-09-20 16:26:45,621 INFO  - Finished svc-php
+2024-09-20 16:26:47,278 DEBUG - Starting WinSW in service mode
+2024-09-20 16:26:47,485 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:26:47,518 INFO  - Started process 1920
+2024-09-20 16:26:47,532 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-20 16:38:40,702 DEBUG - Starting WinSW in service mode
+2024-09-20 16:38:41,186 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-20 16:38:41,248 INFO  - Started process 2492
+2024-09-20 16:38:41,264 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-21 21:31:36,361 INFO  - Stopping svc-php
+2024-09-21 21:31:36,368 INFO  - Started process 4368
+2024-09-21 21:31:36,368 DEBUG - WaitForProcessToExit 2492+4368
+2024-09-21 21:31:36,418 INFO  - Finished svc-php
+2024-09-21 21:48:47,173 DEBUG - Starting WinSW in service mode
+2024-09-21 21:48:47,485 INFO  - Starting C:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\sija-stm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-21 21:48:47,516 INFO  - Started process 2428
+2024-09-21 21:48:47,532 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-21 21:49:50,827 INFO  - Stopping svc-php
+2024-09-21 21:49:50,843 INFO  - Started process 1992
+2024-09-21 21:49:50,843 DEBUG - WaitForProcessToExit 2428+1992
+2024-09-21 21:49:50,890 INFO  - Finished svc-php
+2024-09-21 21:50:30,286 DEBUG - Starting WinSW in console mode
+2024-09-21 21:50:32,321 DEBUG - Starting WinSW in console mode
+2024-09-21 21:50:32,368 INFO  - Uninstalling service 'ATM Stack PHP (powered by WinSW) (svc-php)'...
+2024-09-21 21:50:32,368 INFO  - Service 'ATM Stack PHP (powered by WinSW) (svc-php)' was uninstalled successfully.
+2024-09-21 22:00:26,108 DEBUG - Starting WinSW in console mode
+2024-09-21 22:00:26,162 FATAL - Unhandled exception
+System.Exception: Unknown command: install.txt
+   at WinSW.Program.Run(String[] argsArray, IServiceConfig config)
+   at WinSW.Program.Main(String[] args)
+2024-09-21 22:00:32,104 DEBUG - Starting WinSW in console mode
+2024-09-21 22:00:33,967 DEBUG - Starting WinSW in console mode
+2024-09-21 22:00:34,016 INFO  - Installing service 'ATM Stack PHP (powered by WinSW) (svc-php)'...
+2024-09-21 22:00:34,053 INFO  - Service 'ATM Stack PHP (powered by WinSW) (svc-php)' was installed successfully.
+2024-09-21 22:00:44,972 DEBUG - Starting WinSW in service mode
+2024-09-21 22:00:45,172 INFO  - Starting C:\atm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\atm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-21 22:00:45,207 INFO  - Started process 4268
+2024-09-21 22:00:45,222 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-21 22:02:56,194 INFO  - Stopping svc-php
+2024-09-21 22:02:56,201 INFO  - Started process 3812
+2024-09-21 22:02:56,201 DEBUG - WaitForProcessToExit 4268+3812
+2024-09-21 22:02:56,241 INFO  - Finished svc-php
+2024-09-21 22:02:58,020 DEBUG - Starting WinSW in service mode
+2024-09-21 22:02:58,245 INFO  - Starting C:\atm.stack\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\atm.stack\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-21 22:02:58,273 INFO  - Started process 2188
+2024-09-21 22:02:58,290 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-26 17:08:22,940 INFO  - Stopping svc-php
+2024-09-26 17:08:22,943 INFO  - Started process 2600
+2024-09-26 17:08:22,944 DEBUG - WaitForProcessToExit 2188+2600
+2024-09-26 17:08:23,039 INFO  - Finished svc-php
+2024-09-26 17:09:48,366 DEBUG - Starting WinSW in console mode
+2024-09-26 17:09:51,616 DEBUG - Starting WinSW in console mode
+2024-09-26 17:09:51,658 INFO  - Uninstalling service 'ATM Stack PHP (powered by WinSW) (svc-php)'...
+2024-09-26 17:09:51,666 INFO  - Service 'ATM Stack PHP (powered by WinSW) (svc-php)' was uninstalled successfully.

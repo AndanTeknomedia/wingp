@@ -1,0 +1,268 @@
+2024-09-20 15:24:11,865 DEBUG - Starting WinSW in console mode
+2024-09-20 15:24:13,586 DEBUG - Starting WinSW in console mode
+2024-09-20 15:24:13,633 INFO  - Uninstalling service 'ATM Stack Nnginx (powered by WinSW) (atmstack-nginx)'...
+2024-09-20 15:24:13,642 INFO  - Service 'ATM Stack Nnginx (powered by WinSW) (atmstack-nginx)' was uninstalled successfully.
+2024-09-20 15:29:21,727 DEBUG - Starting WinSW in console mode
+2024-09-20 15:29:23,999 DEBUG - Starting WinSW in console mode
+2024-09-20 15:29:24,052 INFO  - Installing service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)'...
+2024-09-20 15:29:24,137 INFO  - Service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)' was installed successfully.
+2024-09-20 15:29:31,865 DEBUG - Starting WinSW in service mode
+2024-09-20 15:29:32,041 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:29:32,072 INFO  - Started process 4116
+2024-09-20 15:29:32,084 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:30:14,294 INFO  - Stopping svc-nginx
+2024-09-20 15:30:14,296 INFO  - Started process 3364
+2024-09-20 15:30:14,296 DEBUG - WaitForProcessToExit 4116+3364
+2024-09-20 15:30:14,382 INFO  - Finished svc-nginx
+2024-09-20 15:33:10,659 DEBUG - Starting WinSW in service mode
+2024-09-20 15:33:10,836 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:33:10,867 INFO  - Started process 4940
+2024-09-20 15:33:10,879 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:34:28,970 INFO  - Stopping svc-nginx
+2024-09-20 15:34:28,975 INFO  - Started process 4052
+2024-09-20 15:34:28,977 DEBUG - WaitForProcessToExit 4940+4052
+2024-09-20 15:34:29,070 INFO  - Finished svc-nginx
+2024-09-20 15:34:30,703 DEBUG - Starting WinSW in service mode
+2024-09-20 15:34:30,879 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:34:30,910 INFO  - Started process 4836
+2024-09-20 15:34:30,923 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:36:05,649 INFO  - Stopping svc-nginx
+2024-09-20 15:36:05,652 INFO  - Started process 4624
+2024-09-20 15:36:05,653 DEBUG - WaitForProcessToExit 4836+4624
+2024-09-20 15:36:05,704 INFO  - Finished svc-nginx
+2024-09-20 15:36:08,553 DEBUG - Starting WinSW in service mode
+2024-09-20 15:36:08,755 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:36:08,789 INFO  - Started process 4944
+2024-09-20 15:36:08,803 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:38:31,644 INFO  - Stopping svc-nginx
+2024-09-20 15:38:31,646 INFO  - Started process 4796
+2024-09-20 15:38:31,647 DEBUG - WaitForProcessToExit 4944+4796
+2024-09-20 15:38:31,734 INFO  - Finished svc-nginx
+2024-09-20 15:38:33,459 DEBUG - Starting WinSW in service mode
+2024-09-20 15:38:33,653 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:38:33,685 INFO  - Started process 4636
+2024-09-20 15:38:33,698 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:40:57,455 INFO  - Stopping svc-nginx
+2024-09-20 15:40:57,458 INFO  - Started process 4584
+2024-09-20 15:40:57,459 DEBUG - WaitForProcessToExit 4636+4584
+2024-09-20 15:40:57,545 INFO  - Finished svc-nginx
+2024-09-20 15:40:59,245 DEBUG - Starting WinSW in service mode
+2024-09-20 15:40:59,431 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:40:59,462 INFO  - Started process 4796
+2024-09-20 15:40:59,479 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:42:52,247 INFO  - Stopping svc-nginx
+2024-09-20 15:42:52,251 INFO  - Started process 4632
+2024-09-20 15:42:52,252 DEBUG - WaitForProcessToExit 4796+4632
+2024-09-20 15:42:52,314 INFO  - Finished svc-nginx
+2024-09-20 15:42:53,984 DEBUG - Starting WinSW in service mode
+2024-09-20 15:42:54,169 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:42:54,203 INFO  - Started process 5044
+2024-09-20 15:42:54,215 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:45:45,613 INFO  - Stopping svc-nginx
+2024-09-20 15:45:45,619 INFO  - Started process 1448
+2024-09-20 15:45:45,619 DEBUG - WaitForProcessToExit 5044+1448
+2024-09-20 15:45:45,671 INFO  - Finished svc-nginx
+2024-09-20 15:45:47,361 DEBUG - Starting WinSW in service mode
+2024-09-20 15:45:47,539 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:45:47,570 INFO  - Started process 4964
+2024-09-20 15:45:47,583 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:47:38,490 INFO  - Stopping svc-nginx
+2024-09-20 15:47:38,494 INFO  - Started process 1044
+2024-09-20 15:47:38,495 DEBUG - WaitForProcessToExit 4964+1044
+2024-09-20 15:47:38,581 INFO  - Finished svc-nginx
+2024-09-20 15:47:40,287 DEBUG - Starting WinSW in service mode
+2024-09-20 15:47:40,468 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:47:40,498 INFO  - Started process 4292
+2024-09-20 15:47:40,510 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:52:01,197 INFO  - Stopping svc-nginx
+2024-09-20 15:52:01,199 INFO  - Started process 3984
+2024-09-20 15:52:01,200 DEBUG - WaitForProcessToExit 4292+3984
+2024-09-20 15:52:01,284 INFO  - Finished svc-nginx
+2024-09-20 15:52:02,953 DEBUG - Starting WinSW in service mode
+2024-09-20 15:52:03,150 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:52:03,181 INFO  - Started process 4420
+2024-09-20 15:52:03,200 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:53:33,922 INFO  - Stopping svc-nginx
+2024-09-20 15:53:33,929 INFO  - Started process 3268
+2024-09-20 15:53:33,929 DEBUG - WaitForProcessToExit 4420+3268
+2024-09-20 15:53:33,986 INFO  - Finished svc-nginx
+2024-09-20 15:53:35,657 DEBUG - Starting WinSW in service mode
+2024-09-20 15:53:35,836 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:53:35,868 INFO  - Started process 1336
+2024-09-20 15:53:35,880 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:57:48,315 INFO  - Stopping svc-nginx
+2024-09-20 15:57:48,318 INFO  - Started process 4844
+2024-09-20 15:57:48,319 DEBUG - WaitForProcessToExit 1336+4844
+2024-09-20 15:57:48,417 INFO  - Finished svc-nginx
+2024-09-20 15:57:50,040 DEBUG - Starting WinSW in service mode
+2024-09-20 15:57:50,219 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:57:50,249 INFO  - Started process 4220
+2024-09-20 15:57:50,264 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 15:59:42,727 INFO  - Stopping svc-nginx
+2024-09-20 15:59:42,730 INFO  - Started process 1420
+2024-09-20 15:59:42,731 DEBUG - WaitForProcessToExit 4220+1420
+2024-09-20 15:59:42,820 INFO  - Finished svc-nginx
+2024-09-20 15:59:44,469 DEBUG - Starting WinSW in service mode
+2024-09-20 15:59:44,647 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 15:59:44,679 INFO  - Started process 3084
+2024-09-20 15:59:44,691 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:01:52,947 INFO  - Stopping svc-nginx
+2024-09-20 16:01:52,953 INFO  - Started process 2008
+2024-09-20 16:01:52,954 DEBUG - WaitForProcessToExit 3084+2008
+2024-09-20 16:01:53,049 INFO  - Finished svc-nginx
+2024-09-20 16:01:54,709 DEBUG - Starting WinSW in service mode
+2024-09-20 16:01:54,897 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:01:54,932 INFO  - Started process 2068
+2024-09-20 16:01:54,946 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:03:22,731 INFO  - Stopping svc-nginx
+2024-09-20 16:03:22,734 INFO  - Started process 5072
+2024-09-20 16:03:22,735 DEBUG - WaitForProcessToExit 2068+5072
+2024-09-20 16:03:22,786 INFO  - Finished svc-nginx
+2024-09-20 16:03:24,472 DEBUG - Starting WinSW in service mode
+2024-09-20 16:03:24,651 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:03:24,682 INFO  - Started process 3452
+2024-09-20 16:03:24,695 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:03:42,962 INFO  - Stopping svc-nginx
+2024-09-20 16:03:42,965 INFO  - Started process 940
+2024-09-20 16:03:42,966 DEBUG - WaitForProcessToExit 3452+940
+2024-09-20 16:03:43,015 INFO  - Finished svc-nginx
+2024-09-20 16:03:44,759 DEBUG - Starting WinSW in service mode
+2024-09-20 16:03:44,961 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:03:44,998 INFO  - Started process 4632
+2024-09-20 16:03:45,013 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:06:08,634 INFO  - Stopping svc-nginx
+2024-09-20 16:06:08,639 INFO  - Started process 3920
+2024-09-20 16:06:08,640 DEBUG - WaitForProcessToExit 4632+3920
+2024-09-20 16:06:08,736 INFO  - Finished svc-nginx
+2024-09-20 16:06:10,399 DEBUG - Starting WinSW in service mode
+2024-09-20 16:06:10,583 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:06:10,616 INFO  - Started process 3368
+2024-09-20 16:06:10,631 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:10:17,442 INFO  - Stopping svc-nginx
+2024-09-20 16:10:17,447 INFO  - Started process 3980
+2024-09-20 16:10:17,448 DEBUG - WaitForProcessToExit 3368+3980
+2024-09-20 16:10:17,542 INFO  - Finished svc-nginx
+2024-09-20 16:10:19,213 DEBUG - Starting WinSW in service mode
+2024-09-20 16:10:19,423 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:10:19,453 INFO  - Started process 3288
+2024-09-20 16:10:19,464 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:13:07,864 INFO  - Stopping svc-nginx
+2024-09-20 16:13:07,870 INFO  - Started process 1384
+2024-09-20 16:13:07,871 DEBUG - WaitForProcessToExit 3288+1384
+2024-09-20 16:13:07,949 INFO  - Finished svc-nginx
+2024-09-20 16:13:09,617 DEBUG - Starting WinSW in service mode
+2024-09-20 16:13:09,811 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:13:09,848 INFO  - Started process 4084
+2024-09-20 16:13:09,864 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:14:53,309 INFO  - Stopping svc-nginx
+2024-09-20 16:14:53,311 INFO  - Started process 3888
+2024-09-20 16:14:53,313 DEBUG - WaitForProcessToExit 4084+3888
+2024-09-20 16:14:53,380 INFO  - Finished svc-nginx
+2024-09-20 16:14:55,110 DEBUG - Starting WinSW in service mode
+2024-09-20 16:14:55,298 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:14:55,332 INFO  - Started process 5056
+2024-09-20 16:14:55,352 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-20 16:38:39,626 DEBUG - Starting WinSW in service mode
+2024-09-20 16:38:40,000 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-20 16:38:40,062 INFO  - Started process 2220
+2024-09-20 16:38:40,094 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:20:55,712 INFO  - Stopping svc-nginx
+2024-09-21 21:20:55,716 INFO  - Started process 4224
+2024-09-21 21:20:55,717 DEBUG - WaitForProcessToExit 2220+4224
+2024-09-21 21:20:55,804 INFO  - Finished svc-nginx
+2024-09-21 21:20:57,995 DEBUG - Starting WinSW in service mode
+2024-09-21 21:20:58,171 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:20:58,203 INFO  - Started process 1580
+2024-09-21 21:20:58,215 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:22:20,949 INFO  - Stopping svc-nginx
+2024-09-21 21:22:20,951 INFO  - Started process 4068
+2024-09-21 21:22:20,952 DEBUG - WaitForProcessToExit 1580+4068
+2024-09-21 21:22:21,015 INFO  - Finished svc-nginx
+2024-09-21 21:22:22,676 DEBUG - Starting WinSW in service mode
+2024-09-21 21:22:22,852 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:22:22,884 INFO  - Started process 4244
+2024-09-21 21:22:22,896 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:23:06,347 INFO  - Stopping svc-nginx
+2024-09-21 21:23:06,354 INFO  - Started process 3616
+2024-09-21 21:23:06,355 DEBUG - WaitForProcessToExit 4244+3616
+2024-09-21 21:23:06,396 INFO  - Finished svc-nginx
+2024-09-21 21:23:08,082 DEBUG - Starting WinSW in service mode
+2024-09-21 21:23:08,277 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:23:08,307 INFO  - Started process 4828
+2024-09-21 21:23:08,319 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:24:45,412 INFO  - Stopping svc-nginx
+2024-09-21 21:24:45,415 INFO  - Started process 636
+2024-09-21 21:24:45,417 DEBUG - WaitForProcessToExit 4828+636
+2024-09-21 21:24:45,479 INFO  - Finished svc-nginx
+2024-09-21 21:24:47,163 DEBUG - Starting WinSW in service mode
+2024-09-21 21:24:47,350 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:24:47,385 INFO  - Started process 872
+2024-09-21 21:24:47,401 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:26:38,300 DEBUG - Starting WinSW in service mode
+2024-09-21 21:26:38,476 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:26:38,506 INFO  - Started process 540
+2024-09-21 21:26:38,519 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:31:33,743 INFO  - Stopping svc-nginx
+2024-09-21 21:31:33,745 INFO  - Started process 2076
+2024-09-21 21:31:33,746 DEBUG - WaitForProcessToExit 540+2076
+2024-09-21 21:31:33,827 INFO  - Finished svc-nginx
+2024-09-21 21:48:46,424 DEBUG - Starting WinSW in service mode
+2024-09-21 21:48:46,643 INFO  - Starting C:\sija-stm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 21:48:46,690 INFO  - Started process 2168
+2024-09-21 21:48:46,705 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 21:49:47,426 INFO  - Stopping svc-nginx
+2024-09-21 21:49:47,426 INFO  - Started process 3884
+2024-09-21 21:49:47,426 DEBUG - WaitForProcessToExit 2168+3884
+2024-09-21 21:49:47,489 INFO  - Finished svc-nginx
+2024-09-21 21:50:43,225 DEBUG - Starting WinSW in console mode
+2024-09-21 21:50:44,942 DEBUG - Starting WinSW in console mode
+2024-09-21 21:50:44,988 INFO  - Uninstalling service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)'...
+2024-09-21 21:50:44,988 INFO  - Service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)' was uninstalled successfully.
+2024-09-21 22:00:14,581 DEBUG - Starting WinSW in console mode
+2024-09-21 22:00:16,578 DEBUG - Starting WinSW in console mode
+2024-09-21 22:00:16,622 INFO  - Installing service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)'...
+2024-09-21 22:00:16,654 INFO  - Service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)' was installed successfully.
+2024-09-21 22:00:42,638 DEBUG - Starting WinSW in service mode
+2024-09-21 22:00:42,813 INFO  - Starting C:\atm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 22:00:42,843 INFO  - Started process 3340
+2024-09-21 22:00:42,858 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 22:02:38,960 INFO  - Stopping svc-nginx
+2024-09-21 22:02:38,962 INFO  - Started process 3712
+2024-09-21 22:02:38,963 DEBUG - WaitForProcessToExit 3340+3712
+2024-09-21 22:02:39,049 INFO  - Finished svc-nginx
+2024-09-21 22:02:40,767 DEBUG - Starting WinSW in service mode
+2024-09-21 22:02:40,986 INFO  - Starting C:\atm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 22:02:41,030 INFO  - Started process 1488
+2024-09-21 22:02:41,045 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 22:04:32,802 INFO  - Stopping svc-nginx
+2024-09-21 22:04:32,805 INFO  - Started process 3720
+2024-09-21 22:04:32,806 DEBUG - WaitForProcessToExit 1488+3720
+2024-09-21 22:04:32,858 INFO  - Finished svc-nginx
+2024-09-21 22:04:34,595 DEBUG - Starting WinSW in service mode
+2024-09-21 22:04:34,763 INFO  - Starting C:\atm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 22:04:34,793 INFO  - Started process 3816
+2024-09-21 22:04:34,806 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 22:06:57,120 INFO  - Stopping svc-nginx
+2024-09-21 22:06:57,125 INFO  - Started process 3272
+2024-09-21 22:06:57,128 DEBUG - WaitForProcessToExit 3816+3272
+2024-09-21 22:06:57,206 INFO  - Finished svc-nginx
+2024-09-21 22:06:58,943 DEBUG - Starting WinSW in service mode
+2024-09-21 22:06:59,114 INFO  - Starting C:\atm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 22:06:59,145 INFO  - Started process 4872
+2024-09-21 22:06:59,161 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-21 22:08:03,915 INFO  - Stopping svc-nginx
+2024-09-21 22:08:03,920 INFO  - Started process 1524
+2024-09-21 22:08:03,921 DEBUG - WaitForProcessToExit 4872+1524
+2024-09-21 22:08:03,974 INFO  - Finished svc-nginx
+2024-09-21 22:08:05,632 DEBUG - Starting WinSW in service mode
+2024-09-21 22:08:05,805 INFO  - Starting C:\atm.stack\daemon\nginx-1.26.2\nginx.exe 
+2024-09-21 22:08:05,835 INFO  - Started process 3784
+2024-09-21 22:08:05,847 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender
+2024-09-26 17:08:25,762 INFO  - Stopping svc-nginx
+2024-09-26 17:08:25,768 INFO  - Started process 2700
+2024-09-26 17:08:25,770 DEBUG - WaitForProcessToExit 3784+2700
+2024-09-26 17:08:25,816 INFO  - Finished svc-nginx
+2024-09-26 17:10:14,023 DEBUG - Starting WinSW in console mode
+2024-09-26 17:10:17,017 DEBUG - Starting WinSW in console mode
+2024-09-26 17:10:17,069 INFO  - Uninstalling service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)'...
+2024-09-26 17:10:17,078 INFO  - Service 'ATM Stack Nginx (powered by WinSW) (svc-nginx)' was uninstalled successfully.
