@@ -1,2 +1,2 @@
 # wingp
-Windows
+Windows, Nginx, PHP (FastCGI) Stack
