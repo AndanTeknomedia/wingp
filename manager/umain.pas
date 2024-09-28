@@ -160,6 +160,7 @@ type
 
     procedure RunExe(CommandLine, Params: string; OnDone: TOnRunExeCallback = nil);
     function  FindBasePath: Boolean;
+    function  UpdateSvcWrapper: Boolean;
     function  FindHostsFilePath: String;
     function  TempFileName: String;
     procedure EnumVHosts;
@@ -320,18 +321,96 @@ begin
 end;
 
 procedure TfMain.acEditHostsFileExecute(Sender: TObject);
+var
+  sei: TShellExecuteInfo;
+  runPath,
+  tmpFile,
+  params: string;
+  i: integer;
+  ExitCode: Dword;
 begin
-  //
+  runPath := ExtractFilePath(Application.ExeName)+'Notepad2.exe';
+  if not FileExists(runPath) then
+  begin
+    runPath := ExtractFileDir(HostsFilePath);
+    runPath := ExtractFileDir(runPath);
+    runPath := ExtractFilePath(runPath) +'notepad.exe';
+  end;
+  FillChar(sei, SizeOf(sei), 0);
+  sei.cbSize := SizeOf(sei);
+  sei.Wnd := Handle;
+  sei.fMask := SEE_MASK_NOCLOSEPROCESS or
+    SEE_MASK_FLAG_DDEWAIT or
+    SEE_MASK_FLAG_NO_UI;
+  sei.lpVerb := 'runas';
+  sei.lpFile := PChar(runPath);
+  sei.lpParameters := PChar(HostsFilePath);
+  sei.nShow := SW_SHOWNORMAL;
+  ShellExecuteEx(@sei);
 end;
 
 procedure TfMain.acEditNginxConfExecute(Sender: TObject);
+var
+  sei: TShellExecuteInfo;
+  runPath,
+  tmpFile,
+  params: string;
+  i: integer;
+  ExitCode: Dword;
 begin
-  //
+  runPath := ExtractFilePath(Application.ExeName)+'Notepad2.exe';
+  if not FileExists(runPath) then
+  begin
+    runPath := ExtractFileDir(HostsFilePath);
+    runPath := ExtractFileDir(runPath);
+    runPath := ExtractFilePath(runPath) +'notepad.exe';
+  end;
+  params := IncludeTrailingPathDelimiter(NginxBasePath)+
+    'conf'+PathDelim+'nginx.conf';
+
+  FillChar(sei, SizeOf(sei), 0);
+  sei.cbSize := SizeOf(sei);
+  sei.Wnd := Handle;
+  sei.fMask := SEE_MASK_NOCLOSEPROCESS or
+    SEE_MASK_FLAG_DDEWAIT or
+    SEE_MASK_FLAG_NO_UI;
+  sei.lpVerb := 'runas';
+  sei.lpFile := PChar(runPath);
+  sei.lpParameters := PChar(params);
+  sei.nShow := SW_SHOWNORMAL;
+  ShellExecuteEx(@sei);
 end;
 
 procedure TfMain.acEditPHPIniExecute(Sender: TObject);
+var
+  sei: TShellExecuteInfo;
+  runPath,
+  tmpFile,
+  params: string;
+  i: integer;
+  ExitCode: Dword;
 begin
-  //
+  runPath := ExtractFilePath(Application.ExeName)+'Notepad2.exe';
+  if not FileExists(runPath) then
+  begin
+    runPath := ExtractFileDir(HostsFilePath);
+    runPath := ExtractFileDir(runPath);
+    runPath := ExtractFilePath(runPath) +'notepad.exe';
+  end;
+  params := IncludeTrailingPathDelimiter(PhpBasePath)+
+    PathDelim+vlPHP.Values['php.ini File'];
+
+  FillChar(sei, SizeOf(sei), 0);
+  sei.cbSize := SizeOf(sei);
+  sei.Wnd := Handle;
+  sei.fMask := SEE_MASK_NOCLOSEPROCESS or
+    SEE_MASK_FLAG_DDEWAIT or
+    SEE_MASK_FLAG_NO_UI;
+  sei.lpVerb := 'runas';
+  sei.lpFile := PChar(runPath);
+  sei.lpParameters := PChar(params);
+  sei.nShow := SW_SHOWNORMAL;
+  ShellExecuteEx(@sei);
 end;
 
 procedure TfMain.acEditVhostExecute(Sender: TObject);
@@ -342,6 +421,7 @@ end;
 procedure TfMain.acInstallNginxExecute(Sender: TObject);
 var
   nginxPath: String;
+  ss: TStringList;
 begin
   //
   SvcNginx := FindService(svcNameNginx);
@@ -352,11 +432,33 @@ begin
   end;
   //
   nginxPath := IncludeTrailingPathDelimiter(NginxBasePath)+'svc-nginx.exe';
-  RunExe(nginxPath, 'install', procedure(code: Integer; status: string)
-  begin
-    MessageDlg('Service installation: '+status, mtInformation, [mbOK], 0);
-    ProcessSCMData();
-  end);
+
+  ss := TStringList.Create;
+  try
+    ss.Add('<service>');
+    ss.Add(format('  <id>%s</id>', [svcNameNginx]));
+    ss.Add(format('  <name>%s</name>', [vlNginx.Values['Service Display Name']]));
+    ss.Add(format('  <description>%s</description>', [vlNginx.Values['Service Description']]));
+    ss.Add('  <!-- Path to the executable, which should be started -->');
+    ss.Add('  <executable>%BASE%\nginx.exe</executable>');
+    ss.Add('  <stopexecutable>C:\Windows\system32\taskkill.exe</stopexecutable>');
+    ss.Add('  <stopargument>/f</stopargument>');
+    ss.Add('  <stopargument>/IM</stopargument>');
+    ss.Add('  <stopargument>nginx.exe</stopargument>');
+    ss.Add('  <logpath>%BASE%\nginx-logs</logpath>');
+    ss.Add('  <logmode>roll</logmode>');
+    ss.Add('</service>');
+
+    ss.SaveToFile(IncludeTrailingPathDelimiter(NginxBasePath)+'svc-nginx.xml');
+
+    RunExe(nginxPath, 'install', procedure(code: Integer; status: string)
+    begin
+      MessageDlg('Service installation: '+status, mtInformation, [mbOK], 0);
+      ProcessSCMData();
+    end);
+  finally
+    ss.Free;
+  end;
 end;
 
 procedure TfMain.acInstallPHPExecute(Sender: TObject);
@@ -575,7 +677,7 @@ var
 begin
   //
   SvcPhp := FindService(svcNamePHP);
-  if svcNginx = nil then
+  if SvcPhp = nil then
   begin
     MessageDlg('Service not installed.', mtWarning, [mbOK], 0);
     exit;
@@ -921,7 +1023,8 @@ begin
     IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)+'vhosts') +
     'vhosts.conf';
   FindBasePath();
-  HostsFilePath := FindHostsFilePath;
+  UpdateSvcWrapper();
+  HostsFilePath := FindHostsFilePath();
   fSCM := TServiceManager.Create;
   fSCM.Active := true;
   // ShowMessage(NginxBasePath + #13 + PhpBasePath);
@@ -1527,6 +1630,19 @@ end;
 procedure TfMain.UpdateStatusBar(aText: STring);
 begin
   StatusBar1.Panels[1].Text := aText;
+end;
+
+function TfMain.UpdateSvcWrapper: Boolean;
+var
+  wrFile, wrName: string;
+begin
+  wrFile := ExtractFilePath(Application.ExeName)+'WinSW.exe';
+  wrName := IncludeTrailingPathDelimiter (NginxBasePath)+'svc-nginx.exe';
+  if not FileExists(wrName) then
+    CopyFile(PChar(wrFile), PChar(wrName), true);
+  wrName := IncludeTrailingPathDelimiter (PhpBasePath)+'svc-php.exe';
+  if not FileExists(wrName) then
+    CopyFile(PChar(wrFile), PChar(wrName), true);
 end;
 
 function TfMain.vHostExists(aHost: ISuperObject): Boolean;

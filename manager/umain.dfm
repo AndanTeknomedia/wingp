@@ -22,15 +22,13 @@ object fMain: TfMain
     Top = 0
     Width = 607
     Height = 234
-    ActivePage = tsVhosts
+    ActivePage = tsPHP
     Align = alClient
     Images = ilWin
     Style = tsFlatButtons
     TabOrder = 0
-    ExplicitHeight = 253
     object tsNginx: TTabSheet
       Caption = 'Nginx'
-      ExplicitHeight = 221
       object vlNginx: TValueListEditor
         Left = 0
         Top = 0
@@ -48,7 +46,6 @@ object fMain: TfMain
           'Default HTTP Port=80'
           'Service Status=Disabled')
         TabOrder = 0
-        ExplicitHeight = 221
         ColWidths = (
           150
           320)
@@ -68,7 +65,6 @@ object fMain: TfMain
         Padding.Bottom = 3
         ShowCaption = False
         TabOrder = 1
-        ExplicitHeight = 221
         object SpeedButton1: TSpeedButton
           AlignWithMargins = True
           Left = 3
@@ -162,7 +158,6 @@ object fMain: TfMain
     object tsPHP: TTabSheet
       Caption = 'PHP FastCGI'
       ImageIndex = 1
-      ExplicitHeight = 221
       object vlPHP: TValueListEditor
         Left = 0
         Top = 0
@@ -176,12 +171,11 @@ object fMain: TfMain
         Strings.Strings = (
           'Service Name=svc-php'
           'Service Display Name=ATM Stack PHP'
-          'Service Description=PHP 7.4.32 ATM Application Stack'
+          'Service Description=PHP ATM Application Stack'
           'fCGI Gateway Port=9123'
           'php.ini File=php.ini'
           'Service Status=Disabled')
         TabOrder = 0
-        ExplicitHeight = 221
         ColWidths = (
           150
           320)
@@ -229,7 +223,6 @@ object fMain: TfMain
         Padding.Bottom = 3
         ShowCaption = False
         TabOrder = 1
-        ExplicitHeight = 221
         object SpeedButton7: TSpeedButton
           AlignWithMargins = True
           Left = 3
@@ -313,7 +306,6 @@ object fMain: TfMain
     object tsVhosts: TTabSheet
       Caption = 'vHosts'
       ImageIndex = 7
-      ExplicitHeight = 221
       object lvHosts: TListView
         Left = 0
         Top = 0
@@ -346,7 +338,6 @@ object fMain: TfMain
         PopupMenu = pmvHosts
         TabOrder = 0
         ViewStyle = vsReport
-        ExplicitHeight = 221
       end
     end
   end
@@ -362,9 +353,6 @@ object fMain: TfMain
       item
         Width = 50
       end>
-    ExplicitLeft = 304
-    ExplicitTop = 152
-    ExplicitWidth = 0
   end
   object MainMenu1: TMainMenu
     Images = ilWin
@@ -603,7 +591,7 @@ object fMain: TfMain
     Left = 346
     Top = 26
     Bitmap = {
-      494C01019E006406640610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01019E006806680610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008002000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5891,8 +5879,8 @@ object fMain: TfMain
       000000000000}
   end
   object pmTray: TPopupMenu
-    Left = 180
-    Top = 52
+    Left = 212
+    Top = 100
     object ShowMonitor1: TMenuItem
       Action = acTrayRestore
     end
