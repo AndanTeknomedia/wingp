@@ -3,7 +3,7 @@ object fMain: TfMain
   Top = 394
   Caption = 'ATMStack Manager'
   ClientHeight = 253
-  ClientWidth = 496
+  ClientWidth = 607
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +12,7 @@ object fMain: TfMain
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
-  Position = poDesigned
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
@@ -20,53 +20,361 @@ object fMain: TfMain
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 496
-    Height = 253
+    Width = 607
+    Height = 234
     ActivePage = tsVhosts
     Align = alClient
     Images = ilWin
     Style = tsFlatButtons
     TabOrder = 0
+    ExplicitHeight = 253
     object tsNginx: TTabSheet
       Caption = 'Nginx'
-      ExplicitLeft = 8
-      ExplicitTop = 31
-      ExplicitWidth = 631
-      ExplicitHeight = 338
-      object ValueListEditor1: TValueListEditor
+      ExplicitHeight = 221
+      object vlNginx: TValueListEditor
         Left = 0
         Top = 0
-        Width = 488
-        Height = 221
+        Width = 476
+        Height = 202
         Align = alClient
         Ctl3D = True
         DisplayOptions = [doAutoColResize, doKeyColFixed]
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goAlwaysShowEditor, goThumbTracking]
         ParentCtl3D = False
+        Strings.Strings = (
+          'Service Name=svc-nginx'
+          'Service Display Name=ATM Stack Nginx'
+          'Service Description=Nginx ATM Application Stack'
+          'Default HTTP Port=80'
+          'Service Status=Disabled')
         TabOrder = 0
+        ExplicitHeight = 221
         ColWidths = (
           150
-          332)
+          320)
+      end
+      object FlowPanel1: TFlowPanel
+        Left = 476
+        Top = 0
+        Width = 123
+        Height = 202
+        Align = alRight
+        AutoSize = True
+        BevelOuter = bvNone
+        Caption = 'FlowPanel1'
+        Padding.Left = 3
+        Padding.Top = 3
+        Padding.Right = 3
+        Padding.Bottom = 3
+        ShowCaption = False
+        TabOrder = 1
+        ExplicitHeight = 221
+        object SpeedButton1: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acInstallNginx
+          Flat = True
+        end
+        object SpeedButton2: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 25
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acUnistallNginx
+          Flat = True
+        end
+        object SpeedButton3: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 53
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 6
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acStartNginx
+          Flat = True
+        end
+        object SpeedButton4: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 75
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acStopNginx
+          Flat = True
+        end
+        object SpeedButton5: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 97
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acRestartNginx
+          Flat = True
+        end
+        object SpeedButton6: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 125
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 6
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acEditNginxConf
+          Flat = True
+        end
+      end
+      object mmNginx: TMemo
+        Left = 48
+        Top = 101
+        Width = 185
+        Height = 89
+        ScrollBars = ssBoth
+        TabOrder = 2
+        Visible = False
+        WordWrap = False
       end
     end
     object tsPHP: TTabSheet
       Caption = 'PHP FastCGI'
       ImageIndex = 1
-      ExplicitLeft = 8
-      ExplicitTop = 32
-      ExplicitWidth = 631
-      ExplicitHeight = 337
+      ExplicitHeight = 221
+      object vlPHP: TValueListEditor
+        Left = 0
+        Top = 0
+        Width = 476
+        Height = 202
+        Align = alClient
+        Ctl3D = True
+        DisplayOptions = [doAutoColResize, doKeyColFixed]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goAlwaysShowEditor, goThumbTracking]
+        ParentCtl3D = False
+        Strings.Strings = (
+          'Service Name=svc-php'
+          'Service Display Name=ATM Stack PHP'
+          'Service Description=PHP 7.4.32 ATM Application Stack'
+          'fCGI Gateway Port=9123'
+          'php.ini File=php.ini'
+          'Service Status=Disabled')
+        TabOrder = 0
+        ExplicitHeight = 221
+        ColWidths = (
+          150
+          320)
+      end
+      object mmPHP: TMemo
+        Left = 216
+        Top = 129
+        Width = 185
+        Height = 89
+        Lines.Strings = (
+          '<service>'
+          '  <id>%svcname%</id>'
+          '  <name>%displayname%</name>'
+          '  <description>%description%</description>  '
+          '  <executable>%exepath%\%exename%</executable>'
+          
+            '  <stopexecutable>C:\Windows\system32\taskkill.exe</stopexecutab' +
+            'le>'
+          '  <stopargument>/f</stopargument>'
+          '  <stopargument>/IM</stopargument>'
+          '  <stopargument>%exename%</stopargument>'
+          '  <env name="PHPRC" value="%exepath%" /> '
+          '  <logpath>%BASE%\php-logs</logpath>'
+          '  <logmode>roll</logmode> '
+          '  <startargument>-b127.0.0.1:%port%</startargument> '
+          '  <startargument>-c%php.ini%</startargument> '
+          '</service>')
+        ScrollBars = ssBoth
+        TabOrder = 2
+        Visible = False
+        WordWrap = False
+      end
+      object FlowPanel2: TFlowPanel
+        Left = 476
+        Top = 0
+        Width = 123
+        Height = 202
+        Align = alRight
+        AutoSize = True
+        BevelOuter = bvNone
+        Caption = 'FlowPanel1'
+        Padding.Left = 3
+        Padding.Top = 3
+        Padding.Right = 3
+        Padding.Bottom = 3
+        ShowCaption = False
+        TabOrder = 1
+        ExplicitHeight = 221
+        object SpeedButton7: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acInstallPHP
+          Flat = True
+        end
+        object SpeedButton8: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 25
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acUninstallPHP
+          Flat = True
+        end
+        object SpeedButton9: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 53
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 6
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acStartPHP
+          Flat = True
+        end
+        object SpeedButton10: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 75
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acStopPHP
+          Flat = True
+        end
+        object SpeedButton11: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 97
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acRestartPHP
+          Flat = True
+        end
+        object SpeedButton12: TSpeedButton
+          AlignWithMargins = True
+          Left = 3
+          Top = 125
+          Width = 117
+          Height = 22
+          Margins.Left = 0
+          Margins.Top = 6
+          Margins.Right = 0
+          Margins.Bottom = 0
+          Action = acEditPHPIni
+          Flat = True
+        end
+      end
     end
     object tsVhosts: TTabSheet
       Caption = 'vHosts'
       ImageIndex = 7
+      ExplicitHeight = 221
+      object lvHosts: TListView
+        Left = 0
+        Top = 0
+        Width = 599
+        Height = 202
+        Align = alClient
+        Columns = <
+          item
+            Caption = 'Name'
+            Width = 100
+          end
+          item
+            Caption = 'Alias'
+            Width = 100
+          end
+          item
+            Caption = 'Root'
+            Width = 250
+          end
+          item
+            Caption = 'Port'
+          end
+          item
+            Caption = 'Enable PHP'
+            Width = 80
+          end>
+        ColumnClick = False
+        ReadOnly = True
+        RowSelect = True
+        PopupMenu = pmvHosts
+        TabOrder = 0
+        ViewStyle = vsReport
+        ExplicitHeight = 221
+      end
     end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 234
+    Width = 607
+    Height = 19
+    Panels = <
+      item
+        Width = 120
+      end
+      item
+        Width = 50
+      end>
+    ExplicitLeft = 304
+    ExplicitTop = 152
+    ExplicitWidth = 0
   end
   object MainMenu1: TMainMenu
     Images = ilWin
-    Left = 384
+    Left = 464
+    Top = 48
     object Manager1: TMenuItem
       Caption = 'Manager'
+      object Refresh1: TMenuItem
+        Action = acRefresh
+      end
       object acMinimize1: TMenuItem
         Action = acMinimize
       end
@@ -133,8 +441,14 @@ object fMain: TfMain
       object acAddVHost1: TMenuItem
         Action = acAddVHost
       end
+      object EditvHost1: TMenuItem
+        Action = acEditVhost
+      end
       object acDeleteVHosts1: TMenuItem
         Action = acDeleteVHosts
+      end
+      object N5: TMenuItem
+        Caption = '-'
       end
       object acEditHostsFile1: TMenuItem
         Action = acEditHostsFile
@@ -147,46 +461,52 @@ object fMain: TfMain
     BalloonFlags = bfInfo
     PopupMenu = pmTray
     OnDblClick = tray1DblClick
-    Left = 336
-    Top = 16
+    Left = 536
+    Top = 72
   end
   object ActionManager1: TActionManager
     ActionBars = <
       item
       end>
     Images = ilWin
-    Left = 416
-    Top = 48
+    Left = 392
+    Top = 56
     StyleName = 'Platform Default'
     object acInstallNginx: TAction
       Category = 'Nginx'
-      Caption = 'acInstallNginx'
+      Caption = 'Install Nginx'
       ImageIndex = 100
+      OnExecute = acInstallNginxExecute
     end
     object acUnistallNginx: TAction
       Category = 'Nginx'
-      Caption = 'acUnistallNginx'
+      Caption = 'Uninstall Nginx'
       ImageIndex = 77
+      OnExecute = acUnistallNginxExecute
     end
     object acStartNginx: TAction
       Category = 'Nginx'
-      Caption = 'acStartNginx'
+      Caption = 'Start Nginx'
       ImageIndex = 94
+      OnExecute = acStartNginxExecute
     end
     object acStopNginx: TAction
       Category = 'Nginx'
-      Caption = 'acStopNginx'
+      Caption = 'Stop Nginx'
       ImageIndex = 102
+      OnExecute = acStopNginxExecute
     end
     object acRestartNginx: TAction
       Category = 'Nginx'
-      Caption = 'acRestartNginx'
+      Caption = 'Restart Nginx'
       ImageIndex = 93
+      OnExecute = acRestartNginxExecute
     end
     object acEditNginxConf: TAction
       Category = 'Nginx'
-      Caption = 'acEditNginxConf'
-      ImageIndex = 68
+      Caption = 'Edit Nginx Config'
+      ImageIndex = 13
+      OnExecute = acEditNginxConfExecute
     end
     object acMinimize: TAction
       Category = 'Manager'
@@ -202,48 +522,63 @@ object fMain: TfMain
     end
     object acInstallPHP: TAction
       Category = 'PHP'
-      Caption = 'acInstallPHP'
+      Caption = 'Install PHP'
       ImageIndex = 100
+      OnExecute = acInstallPHPExecute
     end
     object acUninstallPHP: TAction
       Category = 'PHP'
-      Caption = 'acUninstallPHP'
+      Caption = 'Uninstall PHP'
       ImageIndex = 77
+      OnExecute = acUninstallPHPExecute
     end
     object acStartPHP: TAction
       Category = 'PHP'
-      Caption = 'acStartPHP'
+      Caption = 'Start PHP'
       ImageIndex = 94
+      OnExecute = acStartPHPExecute
     end
     object acStopPHP: TAction
       Category = 'PHP'
-      Caption = 'acStopPHP'
+      Caption = 'Stop PHP'
       ImageIndex = 102
+      OnExecute = acStopPHPExecute
     end
     object acRestartPHP: TAction
       Category = 'PHP'
-      Caption = 'acRestartPHP'
+      Caption = 'Restart PHP'
       ImageIndex = 93
+      OnExecute = acRestartPHPExecute
     end
     object acEditPHPIni: TAction
       Category = 'PHP'
-      Caption = 'acEditPHPIni'
+      Caption = 'Edit php.ini'
       ImageIndex = 68
+      OnExecute = acEditPHPIniExecute
     end
     object acAddVHost: TAction
       Category = 'VHosts'
-      Caption = 'acAddVHost'
+      Caption = 'Add vHost'
       ImageIndex = 18
+      OnExecute = acAddVHostExecute
     end
     object acDeleteVHosts: TAction
       Category = 'VHosts'
-      Caption = 'acDeleteVHosts'
+      Caption = 'Delete vHost'
       ImageIndex = 20
+      OnExecute = acDeleteVHostsExecute
+    end
+    object acEditVhost: TAction
+      Category = 'VHosts'
+      Caption = 'Edit vHost'
+      ImageIndex = 21
+      OnExecute = acEditVhostExecute
     end
     object acEditHostsFile: TAction
       Category = 'VHosts'
-      Caption = 'acEditHostsFile'
-      ImageIndex = 21
+      Caption = 'Edit hosts File'
+      ImageIndex = 103
+      OnExecute = acEditHostsFileExecute
     end
     object acTrayRestore: TAction
       Category = 'Tray Menu'
@@ -253,16 +588,22 @@ object fMain: TfMain
     end
     object acRefresh: TAction
       Category = 'Manager'
-      Caption = 'Refresh'
+      Caption = 'Refresh Status'
       ImageIndex = 42
       OnExecute = acRefreshExecute
     end
+    object acRefreshvHosts: TAction
+      Category = 'VHosts'
+      Caption = 'Refresh vHosts'
+      ImageIndex = 42
+      OnExecute = acRefreshvHostsExecute
+    end
   end
   object ilWin: TImageList
-    Left = 418
-    Top = 2
+    Left = 346
+    Top = 26
     Bitmap = {
-      494C01019E004406540610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01019E006406640610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008002000001002000000000000080
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5550,10 +5891,33 @@ object fMain: TfMain
       000000000000}
   end
   object pmTray: TPopupMenu
-    Left = 364
-    Top = 92
+    Left = 180
+    Top = 52
     object ShowMonitor1: TMenuItem
       Action = acTrayRestore
+    end
+  end
+  object pmvHosts: TPopupMenu
+    Images = ilWin
+    Left = 308
+    Top = 92
+    object AddvHost1: TMenuItem
+      Action = acAddVHost
+    end
+    object EditvHost2: TMenuItem
+      Action = acEditVhost
+    end
+    object DeletevHost1: TMenuItem
+      Action = acDeleteVHosts
+    end
+    object N6: TMenuItem
+      Caption = '-'
+    end
+    object DeletevHost2: TMenuItem
+      Action = acEditHostsFile
+    end
+    object RefreshStatus1: TMenuItem
+      Action = acRefreshvHosts
     end
   end
 end

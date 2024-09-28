@@ -121,3 +121,24 @@ System.Exception: Unknown command: install.txt
 2024-09-26 17:09:51,616 DEBUG - Starting WinSW in console mode
 2024-09-26 17:09:51,658 INFO  - Uninstalling service 'ATM Stack PHP (powered by WinSW) (svc-php)'...
 2024-09-26 17:09:51,666 INFO  - Service 'ATM Stack PHP (powered by WinSW) (svc-php)' was uninstalled successfully.
+2024-09-26 20:54:47,702 DEBUG - Starting WinSW in console mode
+2024-09-26 20:54:47,748 INFO  - Installing service 'ATM Stack PHP (svc-php)'...
+2024-09-26 20:54:47,776 INFO  - Service 'ATM Stack PHP (svc-php)' was installed successfully.
+2024-09-26 21:08:08,034 DEBUG - Starting WinSW in console mode
+2024-09-26 21:08:08,076 INFO  - Uninstalling service 'ATM Stack PHP (svc-php)'...
+2024-09-26 21:08:08,084 INFO  - Service 'ATM Stack PHP (svc-php)' was uninstalled successfully.
+2024-09-26 21:08:12,120 DEBUG - Starting WinSW in console mode
+2024-09-26 21:08:12,163 INFO  - Installing service 'ATM Stack PHP (svc-php)'...
+2024-09-26 21:08:12,190 INFO  - Service 'ATM Stack PHP (svc-php)' was installed successfully.
+2024-09-26 21:08:43,399 DEBUG - Starting WinSW in service mode
+2024-09-26 21:08:43,607 INFO  - Starting C:\wingp.stack\wingp\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\wingp.stack\wingp\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-26 21:08:43,639 INFO  - Started process 4132
+2024-09-26 21:08:43,653 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-09-27 18:31:41,252 INFO  - Stopping svc-php
+2024-09-27 18:31:41,258 INFO  - Started process 1232
+2024-09-27 18:31:41,259 DEBUG - WaitForProcessToExit 4132+1232
+2024-09-27 18:31:41,310 INFO  - Finished svc-php
+2024-09-27 18:35:41,356 DEBUG - Starting WinSW in service mode
+2024-09-27 18:35:41,571 INFO  - Starting C:\wingp.stack\wingp\daemon\php-7.3.32-Win32-VC15-x64\php-cgi.exe  -b127.0.0.1:9123 -cC:\wingp.stack\wingp\daemon\php-7.3.32-Win32-VC15-x64\php.ini 
+2024-09-27 18:35:41,605 INFO  - Started process 936
+2024-09-27 18:35:41,619 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender

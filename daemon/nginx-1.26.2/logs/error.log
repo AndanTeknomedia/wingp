@@ -299,3 +299,25 @@ Stack trace:
 #7 C:\atm.stack\vhosts\atm.stack\api\index.php(24): Slim\Slim->run()
 #8 {main}
   thrown in C:\atm.stack\vhosts\atm.stack\api\index.php on line 21" while reading response header from upstream, client: 127.0.0.1, server: atm.stack, request: "GET /api/ping HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 19:59:47 [error] 3360#1592: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: ::1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "localhost"
+2024/09/26 19:59:55 [error] 3360#1592: *4 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 19:59:59 [error] 3360#1592: *4 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 20:11:58 [error] 1820#4192: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 20:12:14 [error] 4844#5460: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 20:13:41 [error] 2168#5836: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: atm.stack, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "atm.stack"
+2024/09/26 22:45:24 [error] 5800#2960: *1 CreateFile() "C:\wingp.stack\wingp\daemon\nginx-1.26.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2024/09/26 22:45:25 [error] 5800#2960: *3 CreateFile() "C:\wingp.stack\wingp\daemon\nginx-1.26.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "atm.stack", referrer: "http://atm.stack/"
+2024/09/27 15:57:03 [error] 5800#2960: *5 CreateFile() "C:\wingp.stack\wingp\daemon\nginx-1.26.2/html/product-validation-error" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /product-validation-error HTTP/1.1", host: "www.embarcadero.com"
+2024/09/27 15:57:04 [error] 5800#2960: *5 CreateFile() "C:\wingp.stack\wingp\daemon\nginx-1.26.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "www.embarcadero.com", referrer: "http://www.embarcadero.com/product-validation-error"
+2024/09/27 18:30:33 [error] 4708#5552: *2 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected '<' in C:\wingp.stack\wingp\vhosts\tes.io\index.php on line 2" while reading response header from upstream, client: 127.0.0.1, server: tes.io, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "tes.io"
+2024/09/27 18:30:35 [error] 4708#5552: *2 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected '<' in C:\wingp.stack\wingp\vhosts\tes.io\index.php on line 2" while reading response header from upstream, client: 127.0.0.1, server: tes.io, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "tes.io"
+2024/09/27 18:30:37 [error] 4708#5552: *2 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected '<' in C:\wingp.stack\wingp\vhosts\tes.io\index.php on line 2" while reading response header from upstream, client: 127.0.0.1, server: tes.io, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9123", host: "tes.io"
+2024/09/28 13:46:12 [notice] 4560#3988: signal process started
+2024/09/28 13:46:12 [error] 4560#3988: OpenEvent("Global\ngx_stop_4388") failed (5: Access is denied)
+2024/09/28 13:47:27 [notice] 5608#2476: signal process started
+2024/09/28 13:47:27 [error] 5608#2476: OpenEvent("Global\ngx_reload_4388") failed (5: Access is denied)
+2024/09/28 13:47:32 [notice] 5412#1008: signal process started
+2024/09/28 13:47:32 [error] 5412#1008: OpenEvent("Global\ngx_stop_4388") failed (5: Access is denied)
+2024/09/28 13:48:24 [notice] 4608#2456: signal process started
+2024/09/28 13:49:10 [notice] 3856#4820: signal process started
+2024/09/28 13:49:32 [notice] 4704#3344: signal process started

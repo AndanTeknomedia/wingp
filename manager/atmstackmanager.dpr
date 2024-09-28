@@ -8,7 +8,10 @@ uses
   superobject in 'superobject\superobject.pas',
   supertimezone in 'superobject\supertimezone.pas',
   supertypes in 'superobject\supertypes.pas',
-  DelphiVault.Windows.ServiceManager in 'utils\DelphiVault.Windows.ServiceManager.pas';
+  DelphiVault.Windows.ServiceManager in 'utils\DelphiVault.Windows.ServiceManager.pas',
+  uInputVhost in 'utils\uInputVhost.pas' {FInputVhost},
+  uvhostDeleteOption in 'utils\uvhostDeleteOption.pas' {fvHostDeleteOption},
+  uvhostOption in 'utils\uvhostOption.pas' {fvHostOption};
 
 {$R *.res}
 

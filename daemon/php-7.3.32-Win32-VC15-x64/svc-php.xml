@@ -1,7 +1,7 @@
 <service>
   <id>svc-php</id>
-  <name>ATM Stack PHP (powered by WinSW)</name>
-  <description>PHP 7.4.33 ATM Application Stack</description>  
+  <name>ATM Stack PHP</name>
+  <description>PHP 7.4.32 ATM Application Stack</description>  
   <executable>%BASE%\php-cgi.exe</executable>
   <stopexecutable>C:\Windows\system32\taskkill.exe</stopexecutable>
   <stopargument>/f</stopargument>
