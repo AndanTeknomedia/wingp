@@ -163,7 +163,8 @@ type
 
     procedure RunExe(CommandLine, Params: string; OnDone: TOnRunExeCallback = nil);
     function  FindBasePath: Boolean;
-    function  UpdateSvcWrapper: Boolean;
+    function  UpdateSvcWrapperNginx: Boolean;
+    function  UpdateSvcWrapperPhp: Boolean;
     function  FindHostsFilePath: String;
     function  TempFileName: String;
     procedure EnumVHosts;
@@ -456,7 +457,7 @@ begin
     ss.Add('</service>');
 
     ss.SaveToFile(IncludeTrailingPathDelimiter(NginxBasePath)+'svc-nginx.xml');
-
+    UpdateSvcWrapperNginx();
     RunExe(nginxPath, 'install', procedure(code: Integer; status: string)
     begin
       MessageDlg('Service installation: '+status, mtInformation, [mbOK], 0);
@@ -496,6 +497,7 @@ begin
   try
     ss.Text := configs;
     ss.SaveToFile(IncludeTrailingPathDelimiter(PhpBasePath)+'svc-php.xml');
+    UpdateSvcWrapperPhp();
     RunExe(svcExe, 'install', procedure(code: Integer; status: string)
     begin
       MessageDlg('Service installation: '+status, mtInformation, [mbOK], 0);
@@ -1040,7 +1042,6 @@ begin
     IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)+'vhosts') +
     'vhosts.conf';
   FindBasePath();
-  UpdateSvcWrapper();
   HostsFilePath := FindHostsFilePath();
   fSCM := TServiceManager.Create;
   fSCM.Active := true;
@@ -1663,17 +1664,26 @@ begin
   StatusBar1.Panels[1].Text := aText;
 end;
 
-function TfMain.UpdateSvcWrapper: Boolean;
+function TfMain.UpdateSvcWrapperNginx: Boolean;
 var
   wrFile, wrName: string;
 begin
+  Result := True;
   wrFile := ExtractFilePath(Application.ExeName)+'WinSW.exe';
   wrName := IncludeTrailingPathDelimiter (NginxBasePath)+'svc-nginx.exe';
   if not FileExists(wrName) then
-    CopyFile(PChar(wrFile), PChar(wrName), true);
+    Result := CopyFile(PChar(wrFile), PChar(wrName), true);
+end;
+
+function TfMain.UpdateSvcWrapperPhp: Boolean;
+var
+  wrFile, wrName: string;
+begin
+  Result := True;
+  wrFile := ExtractFilePath(Application.ExeName)+'WinSW.exe';
   wrName := IncludeTrailingPathDelimiter (PhpBasePath)+'svc-php.exe';
   if not FileExists(wrName) then
-    CopyFile(PChar(wrFile), PChar(wrName), true);
+    Result := CopyFile(PChar(wrFile), PChar(wrName), true);
 end;
 
 function TfMain.vHostExists(aHost: ISuperObject): Boolean;
