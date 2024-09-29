@@ -105,6 +105,9 @@ type
     RefreshStatus1: TMenuItem;
     acRefreshvHosts: TAction;
     StatusBar1: TStatusBar;
+    N7: TMenuItem;
+    miTrayNginx: TMenuItem;
+    miTrayPHP: TMenuItem;
     procedure acMinimizeExecute(Sender: TObject);
     procedure acTrayRestoreExecute(Sender: TObject);
     procedure acQuitExecute(Sender: TObject);
@@ -178,6 +181,9 @@ type
     procedure RemoveDirRecursively(const ADir: String);
     //
     procedure RunCmd(const ACommand: string);
+
+    procedure DisableAllInput;
+    procedure RestoreAllInput;
 
   public
     { Public declarations }
@@ -859,6 +865,17 @@ begin
   end;
 end;
 
+procedure TfMain.DisableAllInput;
+var
+  i: integer;
+begin
+  for i := 0 to ActionManager1.ActionCount-1 do
+  begin
+    ActionManager1.Actions[i].Tag := Integer(ActionManager1.Actions[i].Enabled);
+    ActionManager1.Actions[i].Enabled := false;
+  end;
+end;
+
 procedure TfMain.DoDeleteVhost(aHost: ISuperObject);
 var
   opts: THostDeleteOptions;
@@ -1183,6 +1200,16 @@ procedure TfMain.RestartService(aService: TServiceInfo);
 begin
   aService.ServiceStop(true);
   aService.ServiceStart(true);
+end;
+
+procedure TfMain.RestoreAllInput;
+var
+  i: integer;
+begin
+  for i := 0 to ActionManager1.ActionCount-1 do
+  begin
+    ActionManager1.Actions[i].Enabled := Boolean(ActionManager1.Actions[i].Tag);
+  end;
 end;
 
 procedure TfMain.RunCmd(const ACommand: string);
@@ -1525,6 +1552,8 @@ begin
       end;
     end;
   end;
+  miTrayNginx.ImageIndex := tsNginx.ImageIndex;
+  miTrayNginx.Caption := 'Nginx : '+vlNginx.Values['Service Status'];
 end;
 
 procedure TfMain.UpdatePhpUiState(const Installed: Boolean;
@@ -1625,6 +1654,8 @@ begin
       end;
     end;
   end;
+  miTrayPHP.ImageIndex := tsPHP.ImageIndex;
+  miTrayPHP.Caption := 'PHP    : '+vlPHP.Values['Service Status'];
 end;
 
 procedure TfMain.UpdateStatusBar(aText: STring);
