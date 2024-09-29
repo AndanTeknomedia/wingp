@@ -2,8 +2,7 @@
   <a href="https://github.com/AndanTeknomedia/wingp/blob/main/manager/wingp-logo.png">
     <img alt="Wingp" height="250" src="https://github.com/AndanTeknomedia/wingp/blob/main/manager/wingp-logo.png?raw=true	">	
   </a>  
-</p><br>
-<p align="center">
+<br>
   <b>Wingp</b> is a mix of Windows, Nginx, PHP (FastCGI) Stack for PHP Developer on Windows.
 </p>
 
