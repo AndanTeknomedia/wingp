@@ -28,7 +28,7 @@ To Build
 
 <p align="center">
 	<img alt="Wingp" height="250" 
-	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp%20Stack%20Manager%20-%20Creating%20New%20Virtual%20Host.png?raw=true">
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Main-Window.png?raw=true">
 	Wingp Stack Manager Main Window
 </p>
 
