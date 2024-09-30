@@ -25,8 +25,6 @@ Follow [usage manual](#usage-manual) for more information on how to use it.
 
 **wingpstack.exe** must be run with under administrator privilege to be able to deal Windows with *hosts* file.
 
-# Usage Manual
-
 # Features
 
 - Installing and Managing Nginx Service
@@ -66,17 +64,51 @@ Follow [usage manual](#usage-manual) for more information on how to use it.
 	<br>Wingp Sistem Tray Status
 </p>		
 
+# Usage Manual
+
 ## Installing and Controlling Services
+
+Wingp uses [WinSW (Windows Service Wrapper)](https://github.com/winsw/winsw) to install and manage services. At first services installation (both Nginx and PHP), Wingp copies `.\WinSW.exe` to `.\daemon\php` directory and `.daemon\nginx` directory generate WinSW configuration XML file in both directories: `svc-nginx.xml` and `svc-php.xml` for Nginx and PHP, respectively.
 
 ### Nginx Service
 
+- To install Nginx service, click on menu Nginx &raquo; Install Nginx.
+- To start Nginx service, click on menu Nginx &raquo; Start Nginx.
+- To stop Nginx service, click on menu Nginx &raquo; Stop Nginx.
+- To Uninstall Nginx service, click on menu Nginx &raquo; Uninstall Nginx. Nginx service must be stopped first.
 ### PHP Service
+
+- To install Nginx service, click on menu PHP &raquo; Install PHP.
+- To start PHP service, click on menu PHP &raquo; Start PHP.
+- To stop PHP service, click on menu PHP &raquo; Stop PHP.
+- To Uninstall PHP service, click on menu PHP &raquo; Uninstall PHP. PHP service must be stopped first.
+
 
 ## Updating Nginx and PHP
 
+Wingp comes with **nginx-1.26.2 for Windows** and **PHP-7.4.32 (x64, thread safe)** included.
+In case you want to update them, follow instructions below.
+
 ### Updating Nginx
 
+
+To update Nginx:
+
+- Stop and then uninstall Nginx service.
+- Delete the content of Nginx directory (i.e. `.\daemon\nginx-1.26.2`).
+- Extract and copy new Nginx files into the directory.
+- Edit Nginx configuration file `.\daemon\nginx-1.26.2\conf\nginx.conf` and this following line after default server block: `include ../../../vhosts/nginx-*.conf;`
+- Re-Install Nginx service.
+
 ### Updating PHP
+
+To update PHP:
+
+- Stop and then uninstall PHP service.
+- Delete the content of php directory (i.e. `.\daemon\php`).
+- Extract and copy new PHP files into the directory.
+- Duplicate `php.ini-production` and rename the copy to `php.ini` and edit it as necessary.
+- Re-Install PHP service.
 
 ## Updating The Stack Manager
 
@@ -90,13 +122,33 @@ To update the stack manager, i.e. **wingpstack.exe** just obtain this file [here
 
 ### Editing VHost
 
+## Tray Icon
+
+Use menu Manager &raquo; Minimize To Tray to hide main window and continue running on Windows sistem tray.
+<p align="center">
+<img alt="Wingp" height="150" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Status-Tray-Icon.png?raw=true">
+</p>
+To restore the main window, right click on the tray icon and click Restore.
+
+:exclamation: Closing the main window will quit the application.
+
 ## Advanced Topic
 
 ### Manually Edit Virtual Host Configuration File
 
 ### Editing Nginx Configuration File
 
+Please follow official documentation [here](https://nginx.org/en/docs/beginners_guide.html#conf_structure).
+
+Wingp needs this line in Nginx server block to enable virtual hosts:
+````
+include ../../../vhosts/nginx-*.conf;
+````
+
 ### Editing PHP Configuration File
+
+Wingp doesn't need any specific configuration in `php.ini` file. Feel free to edit it as necessary. These [directives](https://www.php.net/manual/en/ini.list.php) may help.
 
 ### Windows *hosts* File
 
