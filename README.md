@@ -8,13 +8,29 @@
 
 
 # Download
-Latest release can be downloaded from https://github.com/AndanTeknomedia/wingp/releases/latest
+Latest release can be downloaded from [https://github.com/AndanTeknomedia/wingp/releases/latest](https://github.com/AndanTeknomedia/wingp/releases/latest).
+
+To Build
 
 # Installation
 
 **wingpstack.exe** must be run with under administrator privilege to be able to deal Windows with *hosts* file.
 
 # Usage Manual
+
+# Features
+
+- Installing and Managing Nginx Service
+- Installing and Managing PHP (FastCGI) Service
+- Creating and Managing Virtual Hosts
+
+## Screenshots
+
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/manager/wingp-logo.png?raw=true">
+	Wingp Stack Manager Main Window
+</p>
 
 ## Installing and Controlling Services
 
@@ -79,6 +95,8 @@ Follow these steps to uninstall Wingp:
 
 # Used Tools
 
+Wingp was build using various tools available. The Wingp Manager (wingp.exe) itself was compiled using Delphi XE8 (with Indy 10). Delphi XE2 and higher versions may also compile, but not yet tested.
+
 - Nginx for Windows &raquo; [https://github.com/nginx/nginx/](https://github.com/nginx/nginx/)
 - PHP &raquo; [https://php.net](https://php.net)
 - WinSW (Windows Service Wrapper) &raquo; [https://github.com/winsw/winsw](https://github.com/winsw/winsw)
@@ -90,9 +108,8 @@ Follow these steps to uninstall Wingp:
 - Windows Service Manager for Delphi &raquo; [DelphiVault.Windows.ServiceManager](https://github.com/carmas123/delphi-vault/blob/master/Source/DelphiVault.Windows.ServiceManager.pas)
 - SuperObject for Delphi &amp; FPC &raquo; [https://github.com/pult/SuperObject.Delphi](https://github.com/pult/SuperObject.Delphi)
 
+# Building From Source
 
-
-
-
-
-
+- Close wingpstack.exe if it is running.
+- Open `manager\wingpstack.dproj` in Delphi.
+- On Project Manager panel, right click on Release and click Make. Output exe will be placed at Wingp's root directory.

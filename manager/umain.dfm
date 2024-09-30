@@ -29,6 +29,10 @@ object fMain: TfMain
     TabOrder = 0
     object tsNginx: TTabSheet
       Caption = 'Nginx'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vlNginx: TValueListEditor
         Left = 0
         Top = 0
@@ -158,6 +162,10 @@ object fMain: TfMain
     object tsPHP: TTabSheet
       Caption = 'PHP FastCGI'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vlPHP: TValueListEditor
         Left = 0
         Top = 0
@@ -306,6 +314,10 @@ object fMain: TfMain
     object tsVhosts: TTabSheet
       Caption = 'vHosts'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lvHosts: TListView
         Left = 0
         Top = 0
@@ -731,7 +743,7 @@ object fMain: TfMain
     Left = 346
     Top = 26
     Bitmap = {
-      494C0101A0006C06740610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101A0007806780610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009002000001002000000000000090
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
