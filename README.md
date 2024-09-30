@@ -38,7 +38,7 @@ To Build
 </p>
 <p align="center">
 	<img alt="Wingp" height="250" 
-	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Creating-New-Virtual-Host.png	?raw=true">
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Creating-New-Virtual-Host.png?raw=true">
 	<br>Wingp Virtual Host Creation
 </p>
 <p align="center">
@@ -48,7 +48,7 @@ To Build
 </p>
 <p align="center">
 	<img alt="Wingp" height="250" 
-	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-coolme.io.png	?raw=true">
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-coolme.io.png?raw=true">
 	<br>Virtual Host Served On Wingp
 </p>
 <p align="center">
