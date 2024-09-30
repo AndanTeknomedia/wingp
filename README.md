@@ -10,7 +10,7 @@
 # Download
 Latest release can be downloaded from [https://github.com/AndanTeknomedia/wingp/releases/latest](https://github.com/AndanTeknomedia/wingp/releases/latest).
 
-To Build
+To build Wingp Manager, go [here](#building-from-source)
 
 # Installation
 
