@@ -29,8 +29,33 @@ To Build
 <p align="center">
 	<img alt="Wingp" height="250" 
 	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Main-Window.png?raw=true">
-	Wingp Stack Manager Main Window
+	<br>Wingp Stack Manager Main Window
 </p>
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Serving.png?raw=true">
+	<br>Wingp Stack Manager Serving Nginx and PHP
+</p>
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Creating-New-Virtual-Host.png	?raw=true">
+	<br>Wingp Virtual Host Creation
+</p>
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Virtual-Host-Up-and-Running.png?raw=true">
+	<br>Wingp With Nginx Serving Virtual Host
+</p>
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-coolme.io.png	?raw=true">
+	<br>Virtual Host Served On Wingp
+</p>
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/Wingp-Stack-Manager-Status-Tray-Icon.png?raw=true">
+	<br>Wingp Sistem Tray Status
+</p>		
 
 ## Installing and Controlling Services
 
