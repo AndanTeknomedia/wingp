@@ -10,9 +10,18 @@
 # Download
 Latest release can be downloaded from [https://github.com/AndanTeknomedia/wingp/releases/latest](https://github.com/AndanTeknomedia/wingp/releases/latest).
 
-To build Wingp Manager, go [here](#building-from-source)
+Or you can clone the project and run from there
+```bash
+C:\App>git clone https://github.com/AndanTeknomedia/wingp.git
+```
+
+To build Wingp Stack Manager, go [here](#building-from-source)
 
 # Installation
+
+Go to Wingp main directory and run **wingpstack.exe**
+
+Follow [usage manual](#usage-manual) for more information on how to use it.
 
 **wingpstack.exe** must be run with under administrator privilege to be able to deal Windows with *hosts* file.
 
