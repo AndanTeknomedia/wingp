@@ -144,6 +144,8 @@ Open Wingp Stack Manager main window.
 
 ### Deleting VHost
 
+**Important!** You may want to copy (backup) your virtual host root directories before uninstalling Wingp.
+
 - Click on menu VHosts &raquo; Delete VHost
 - Confirm your options and click OK
 
