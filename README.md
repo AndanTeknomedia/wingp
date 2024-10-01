@@ -174,7 +174,7 @@ You may manually edit these files and add your own configration, like URL rewrit
 
 ### Enabling SSL on Virtual Hosts 
 
-To enable SSL on virtual hosts locally, this post may help: [https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8(https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8)
+To enable SSL on virtual hosts locally, this post may help: [https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8](https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8)
 
 To Enable SSL on virtual hosts publicly, you may use [Certbot](https://certbot.eff.org/instructions?ws=nginx&os=windows) or [Win ACME](https://www.win-acme.com). Follow their istructions on how to obtain and install SSL certificate.
 
