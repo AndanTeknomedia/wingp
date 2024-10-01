@@ -124,7 +124,7 @@ Open Wingp Stack Manager main window.
 
 - Click on menu VHosts &raquo; Add VHost
 - Enter parameter. The host name (i.e. the domain name) must be unique and consts of alphanumeric character only, plus the `-` and `.`
-- Browse for root directory where the host's file will be located. 
+- Browse for root directory where the host's file will be located. Please use folder inside `.\vhosts` to avoid issues with PHP.
 
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_13_50-Browse-For-Folder.png?raw=true">
 
