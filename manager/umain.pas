@@ -305,6 +305,11 @@ begin
     exit;
   end;
   aName := LowerCase(lvHosts.Selected.Caption);
+  if MessageDlg('Delete vhosts "'+aname+'"?'#13+
+    'You may wanto to backup root directory of this vhost before proceeding.', mtConfirmation,mbYesNo,0) <> mrYes then
+  begin
+    exit;
+  end;
   found:= false;
   for i := ivHosts.A['vhosts'].Length-1 downto 0 do
   begin

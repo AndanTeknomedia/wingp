@@ -125,19 +125,33 @@ Open Wingp Stack Manager main window.
 - Click on menu VHosts &raquo; Add VHost
 - Enter parameter. The host name (i.e. the domain name) must be unique and consts of alphanumeric character only, plus the `-` and `.`
 - Browse for root directory where the host's file will be located. 
+
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_13_50-Browse-For-Folder.png?raw=true">
-- IPv6 is supported by Nginx but not tested by Wingp
-- Port 443  
+
+- IPv6 is supported by Nginx but not tested by Wingp.
+- Port 443 can be checked if you want to use SSL.
 - Update hosts file only enabled if Wingp is running under administrative privilege.
 - Check Generate Default Index File to let Wingp automatically create `index.php` (or `index.html` if PHP not enabled) in the host's root directory. If the file already exists (i.e. you select an existing directory), Wingp will ask if you want to overwrite it.
 - Click Save to create the virtual host.
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_23_09-vHost.png?raw=true">
+
 - Wingp will ask to reload Nginx (if it is running). Click OK to confirm your options.
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_23_35-Create-vHost.png?raw=true">
 
+- Wait until the creation process completed. You can browse your virtual host on `http://myapp.net`
+
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01--14_43_04-myapp.net.png?raw=true">
+
 ### Deleting VHost
 
+- Click on menu VHosts &raquo; Delete VHost
+- Confirm your options and click OK
+
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01--14_46_15-Delete-vHost.png?raw=true">
+
 ### Editing VHost
+
+Not yet implemented. Please [edit manually](#manually-edit-virtual-host-configuration-file).
 
 ## Tray Icon
 
