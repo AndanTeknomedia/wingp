@@ -116,7 +116,24 @@ To update the stack manager, i.e. **wingpstack.exe** just obtain this file [here
 
 ## Managing VHosts
 
+Managing virtual host is the main goal of Wingp.
+
 ### Adding VHost
+
+Open Wingp Stack Manager main window. 
+
+- Click on menu VHosts &raquo; Add VHost
+- Enter parameter. The host name (i.e. the domain name) must be unique and consts of alphanumeric character only, plus the `-` and `.`
+- Browse for root directory where the host's file will be located. 
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_13_50-Browse-For-Folder.png?raw=true">
+- IPv6 is supported by Nginx but not tested by Wingp
+- Port 443  
+- Update hosts file only enabled if Wingp is running under administrative privilege.
+- Check Generate Default Index File to let Wingp automatically create `index.php` (or `index.html` if PHP not enabled) in the host's root directory. If the file already exists (i.e. you select an existing directory), Wingp will ask if you want to overwrite it.
+- Click Save to create the virtual host.
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_23_09-vHost.png?raw=true">
+- Wingp will ask to reload Nginx (if it is running). Click OK to confirm your options.
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-01-14_23_35-Create-vHost.png?raw=true">
 
 ### Deleting VHost
 
@@ -137,6 +154,16 @@ To restore the main window, right click on the tray icon and click Restore.
 
 ### Manually Edit Virtual Host Configuration File
 
+Every virtual hosts has its own configuration. These configuration can be found in `.\vhosts\nginx-<vhost-name>.conf` files. Wingp manages these file, add or delete them when their virtual hosts added or removed. These files are included as server block in Nginx's main configuration file. Check [here](#editing-php-configuration-file) for more info.
+
+You may manually edit these files and add your own configration, like URL rewriting, resource protection and installing SSL certificates.
+
+### Enabling SSL on Virtual Hosts 
+
+To enable SSL on virtual hosts locally, this post may help: [https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8(https://medium.com/the-new-control-plane/generating-self-signed-certificates-on-windows-7812a600c2d8)
+
+To Enable SSL on virtual hosts publicly, you may use [Certbot](https://certbot.eff.org/instructions?ws=nginx&os=windows) or [Win ACME](https://www.win-acme.com). Follow their istructions on how to obtain and install SSL certificate.
+
 ### Editing Nginx Configuration File
 
 Please follow official documentation [here](https://nginx.org/en/docs/beginners_guide.html#conf_structure).
@@ -152,7 +179,26 @@ Wingp doesn't need any specific configuration in `php.ini` file. Feel free to ed
 
 ### Windows *hosts* File
 
+Wingp updates Windows hosts file everytime a virtual host added or removed. Wingp only map virtual host's name to local loopback IP, for example:
+
+```
+127.0.0.1 coolme.io
+127.0.0.1 myapp.net
+```
+
+When a virtual host is removed, the corresponding entry also removed.
+
+If you need to access Nginx virtual hosts from LAN, you need to update the accessing computer's hosts file and map the serving computer's IP to virtual host name there. The serving computer is where Wingp is running.You can also use a router to do this task.
+
 # Windows Firewall
+
+Nginx and PHP service executables need to be allowed to go through Windows Firewall. You can allow either these executables or their ports (as shown on Wingp Stack Manager main window).
+
+Only Nginx needed to be allowed for external access (i.e. LAN and public internet).
+
+To access your virtual host from public internet, use a domain name (the same as the virtual host name) and point it to you computer's public IP. You may need to add port-forwarding entry in your modem/router configuration. 
+
+:exclamation: publishing your virtual host to the internet is risky. Please take everything into your consideration. 
 
 # Uninstallation
 
@@ -199,3 +245,16 @@ Wingp was build using various tools available. The Wingp Manager (wingp.exe) its
 - Close wingpstack.exe if it is running.
 - Open `manager\wingpstack.dproj` in Delphi.
 - On Project Manager panel, right click on Release and click Make. Output exe will be placed at Wingp's root directory.
+
+
+# Disclaimer
+
+Wingp was designed to aid in application development, not for production use. Wingp also doesn't take security issues into its concern, and leaves them to Nginx and PHP.
+
+Wingp can be used, repackaged and redistributed freely without any cost. 
+
+Wingp came with no warranty, and is not responsible for any risk and damage. If you use Wingp, the any responsibility is on you.
+
+
+
+

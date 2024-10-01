@@ -1,0 +1,15 @@
+<service>
+  <id>svc-php</id>
+  <name>Wingp Stack PHP</name>
+  <description>PHP Wingp Application Stack</description>  
+  <executable>%BASE%\php-cgi.exe</executable>
+  <stopexecutable>C:\Windows\system32\taskkill.exe</stopexecutable>
+  <stopargument>/f</stopargument>
+  <stopargument>/IM</stopargument>
+  <stopargument>php-cgi.exe</stopargument>
+  <env name="PHPRC" value="%BASE%" /> 
+  <logpath>%BASE%\php-logs</logpath>
+  <logmode>roll</logmode> 
+  <startargument>-b127.0.0.1:9123</startargument> 
+  <startargument>-c%BASE%\php.ini</startargument> 
+</service>

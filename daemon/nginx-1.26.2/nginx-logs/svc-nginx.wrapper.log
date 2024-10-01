@@ -17,3 +17,10 @@
 2024-09-30 22:42:14,582 INFO  - Started process 2244
 2024-09-30 22:42:14,582 DEBUG - WaitForProcessToExit 3956+2244
 2024-09-30 22:42:14,673 INFO  - Finished svc-nginx
+2024-10-01 14:22:37,409 DEBUG - Starting WinSW in console mode
+2024-10-01 14:22:37,458 INFO  - Installing service 'Wingp Stack Nginx (svc-nginx)'...
+2024-10-01 14:22:37,561 INFO  - Service 'Wingp Stack Nginx (svc-nginx)' was installed successfully.
+2024-10-01 14:22:40,149 DEBUG - Starting WinSW in service mode
+2024-10-01 14:22:40,335 INFO  - Starting C:\wingp.stack\wingp\daemon\nginx-1.26.2\nginx.exe 
+2024-10-01 14:22:40,379 INFO  - Started process 4032
+2024-10-01 14:22:40,394 DEBUG - Forwarding logs of the process System.Diagnostics.Process (nginx) to WinSW.RollingLogAppender

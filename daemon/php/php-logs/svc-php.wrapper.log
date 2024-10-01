@@ -9,3 +9,10 @@
 2024-09-30 22:42:16,277 INFO  - Started process 5084
 2024-09-30 22:42:16,278 DEBUG - WaitForProcessToExit 3736+5084
 2024-09-30 22:42:16,329 INFO  - Finished svc-php
+2024-10-01 14:22:44,079 DEBUG - Starting WinSW in console mode
+2024-10-01 14:22:44,122 INFO  - Installing service 'Wingp Stack PHP (svc-php)'...
+2024-10-01 14:22:44,151 INFO  - Service 'Wingp Stack PHP (svc-php)' was installed successfully.
+2024-10-01 14:22:46,441 DEBUG - Starting WinSW in service mode
+2024-10-01 14:22:46,659 INFO  - Starting C:\wingp.stack\wingp\daemon\php\php-cgi.exe  -b127.0.0.1:9123 -cC:\wingp.stack\wingp\daemon\php\php.ini 
+2024-10-01 14:22:46,693 INFO  - Started process 3604
+2024-10-01 14:22:46,710 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
