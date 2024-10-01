@@ -16,3 +16,7 @@
 2024-10-01 14:22:46,659 INFO  - Starting C:\wingp.stack\wingp\daemon\php\php-cgi.exe  -b127.0.0.1:9123 -cC:\wingp.stack\wingp\daemon\php\php.ini 
 2024-10-01 14:22:46,693 INFO  - Started process 3604
 2024-10-01 14:22:46,710 DEBUG - Forwarding logs of the process System.Diagnostics.Process (php-cgi) to WinSW.RollingLogAppender
+2024-10-01 14:56:52,082 INFO  - Stopping svc-php
+2024-10-01 14:56:52,084 INFO  - Started process 3728
+2024-10-01 14:56:52,085 DEBUG - WaitForProcessToExit 3604+3728
+2024-10-01 14:56:52,124 INFO  - Finished svc-php
