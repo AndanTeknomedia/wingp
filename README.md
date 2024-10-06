@@ -69,7 +69,7 @@ Follow [usage manual](#usage-manual) for more information on how to use it.
 
 ## Installing and Controlling Services
 
-Wingp uses [WinSW (Windows Service Wrapper)](https://github.com/winsw/winsw) to install and manage services. At first services installation (both Nginx and PHP), Wingp copies `.\WinSW.exe` to `.\daemon\php` directory and `.daemon\nginx` directory generate WinSW configuration XML file in both directories: `svc-nginx.xml` and `svc-php.xml` for Nginx and PHP, respectively.
+Wingp uses [WinSW (Windows Service Wrapper)](https://github.com/winsw/winsw) to install and manage services. At first services installation (both Nginx and PHP), Wingp copies `.\WinSW.exe` to `.\daemon\php\php-version` directory and `.daemon\nginx` directory generate WinSW configuration XML file in both directories: `svc-nginx.xml` and `svc-php.xml` for Nginx and PHP, respectively.
 
 ### Nginx Service
 
