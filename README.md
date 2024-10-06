@@ -145,6 +145,7 @@ You can install other PHP version by following these steps:
 - Extract the downloaded version into `.\daemon\php` directory, keeping the default directory name. For example, `php-8.0.0-Win32-vs16-x64` is extracted to `.\daemon\php\php-8.0.0-Win32-vs16-x64` without altering the output directory name. This is important as the directory name will be used by Wingp to identify its version.
 - After the extraction, the content of `.\daemon\php` will look like this:
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_19_27-php-multiversion.png?raw=true">
+
 - Use menu PHP &raquo; PHP Version &raquo; Reload PHP Versions to reload available PHP version.
 
 If only one version of PHP is available, Wingp will set it as active default. If multiple version are available, Wingp will select the first one as active default. 
