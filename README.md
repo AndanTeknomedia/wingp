@@ -155,6 +155,7 @@ To change active PHP version, follow these steps:
 - Uninstall PHP service.
 - Use menu PHP &raquo; PHP Version &raquo; <PHP-x.y.x> to activate it.
 <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_20_52-php-selectversion.png?raw=true">	
+
 - Confirm the dialog asking to change PHP version.
 - Re-install PHP service. The selected PHP version will be activated and installed as service
 - Start PHP service
