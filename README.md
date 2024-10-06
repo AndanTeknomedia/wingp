@@ -30,7 +30,7 @@ Follow [usage manual](#usage-manual) for more information on how to use it.
 - Installing and Managing Nginx Service
 - Installing and Managing PHP (FastCGI) Service
 - Creating and Managing Virtual Hosts
-- Supports Multiple PHP Version
+- Supports Multiple PHP Versions
 
 ## Screenshots
 
