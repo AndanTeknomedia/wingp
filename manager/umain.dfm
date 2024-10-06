@@ -22,7 +22,7 @@ object fMain: TfMain
     Top = 0
     Width = 607
     Height = 234
-    ActivePage = tsNginx
+    ActivePage = tsPHP
     Align = alClient
     Images = ilWin
     Style = tsFlatButtons
@@ -172,6 +172,8 @@ object fMain: TfMain
           'Service Name=svc-php'
           'Service Display Name=Wingp Stack PHP'
           'Service Description=PHP Wingp Application Stack'
+          'PHP Version=Not available'
+          'PHP Directory=Not available'
           'fCGI Gateway Port=9123'
           'php.ini File=php.ini'
           'Service Status=Disabled')
@@ -510,6 +512,23 @@ object fMain: TfMain
       object acUninstallPHP1: TMenuItem
         Action = acUninstallPHP
       end
+      object N8: TMenuItem
+        Caption = '-'
+      end
+      object miPhpVersion: TMenuItem
+        Caption = 'PHP Version'
+        object d1: TMenuItem
+          Caption = 'Add Version...'
+          OnClick = d1Click
+        end
+        object ReloadPHPVersions1: TMenuItem
+          Caption = 'Reload PHP Versions'
+          OnClick = ReloadPHPVersions1Click
+        end
+        object N9: TMenuItem
+          Caption = '-'
+        end
+      end
       object N3: TMenuItem
         Caption = '-'
       end
@@ -731,7 +750,7 @@ object fMain: TfMain
     Left = 346
     Top = 26
     Bitmap = {
-      494C0101A0007C067C0610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101A0008006800610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009002000001002000000000000090
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

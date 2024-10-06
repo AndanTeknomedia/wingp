@@ -108,6 +108,11 @@ type
     N7: TMenuItem;
     miTrayNginx: TMenuItem;
     miTrayPHP: TMenuItem;
+    N8: TMenuItem;
+    miPhpVersion: TMenuItem;
+    d1: TMenuItem;
+    ReloadPHPVersions1: TMenuItem;
+    N9: TMenuItem;
     procedure acMinimizeExecute(Sender: TObject);
     procedure acTrayRestoreExecute(Sender: TObject);
     procedure acQuitExecute(Sender: TObject);
@@ -136,14 +141,19 @@ type
     procedure acDeleteVHostsExecute(Sender: TObject);
     procedure acEditVhostExecute(Sender: TObject);
     procedure acEditHostsFileExecute(Sender: TObject);
+    procedure d1Click(Sender: TObject);
+    procedure ReloadPHPVersions1Click(Sender: TObject);
   private
     { Private declarations }
     RunAsAdmin: Boolean;
-    ivHosts: ISuperObject;
+    ivHosts,
+    iPhpVersions: ISuperObject;
     HostsFilePath,
+    PhpVersionFilePath,
     vHostsConfigPath,
     NginxBasePath,
-    PhpBasePath,
+    PhpMainPath,
+    PhpBasePathCurrent,
     svcNameNginx,
     svcNamePHP: String;
     SvcNginx,
@@ -157,12 +167,14 @@ type
     procedure RestartService(aService : TServiceInfo);
     procedure UpdateNginxUiState(const Installed: Boolean; const AState: TServiceState);
     procedure UpdatePhpUiState(const Installed: Boolean; const AState: TServiceState);
+    procedure UpdatePhpVersionMenuState(aState: Boolean);
 
     function  isSvcNginxInstalled: Boolean;
     function  isSvcPhpInstalled: Boolean;
 
     procedure RunExe(CommandLine, Params: string; OnDone: TOnRunExeCallback = nil);
-    function  FindBasePath: Boolean;
+    function  FindNginxBasePath: Boolean;
+    function  FindPhpBasePath: Boolean;
     function  UpdateSvcWrapperNginx: Boolean;
     function  UpdateSvcWrapperPhp: Boolean;
     function  FindHostsFilePath: String;
@@ -185,6 +197,7 @@ type
 
     procedure DisableAllInput;
     procedure RestoreAllInput;
+    procedure ChangePhpVersion(Sender: TObject);
 
   public
     { Public declarations }
@@ -201,7 +214,7 @@ implementation
 
 {$R *.dfm}
 
-uses uInputVhost, uvhostOption, uvhostDeleteOption;
+uses uInputVhost, uvhostOption, uvhostDeleteOption, KaZip;
 
 procedure TfMain.acAddVHostExecute(Sender: TObject);
 var
@@ -409,7 +422,7 @@ begin
     runPath := ExtractFileDir(runPath);
     runPath := ExtractFilePath(runPath) +'notepad.exe';
   end;
-  params := IncludeTrailingPathDelimiter(PhpBasePath)+
+  params := IncludeTrailingPathDelimiter(PhpBasePathCurrent)+
     PathDelim+vlPHP.Values['php.ini File'];
 
   FillChar(sei, SizeOf(sei), 0);
@@ -453,10 +466,19 @@ begin
     ss.Add(format('  <description>%s</description>', [vlNginx.Values['Service Description']]));
     ss.Add('  <!-- Path to the executable, which should be started -->');
     ss.Add('  <executable>%BASE%\nginx.exe</executable>');
+    // --
+    // {
+    ss.Add('  <startargument>-p%BASE%</startargument>');
+    {
+    ss.Add('  <stopexecutable>%BASE%\nginx.exe</stopexecutable>');
+    ss.Add('  <stopargument>-s</stopargument>');
+    ss.Add('  <stopargument>stop</stopargument>');
+    }
     ss.Add('  <stopexecutable>C:\Windows\system32\taskkill.exe</stopexecutable>');
     ss.Add('  <stopargument>/f</stopargument>');
     ss.Add('  <stopargument>/IM</stopargument>');
     ss.Add('  <stopargument>nginx.exe</stopargument>');
+    // --
     ss.Add('  <logpath>%BASE%\nginx-logs</logpath>');
     ss.Add('  <logmode>roll</logmode>');
     ss.Add('</service>');
@@ -488,7 +510,7 @@ begin
   end;
   //
   phpExe := 'php-cgi.exe';
-  svcExe := IncludeTrailingPathDelimiter(PhpBasePath)+'svc-php.exe';
+  svcExe := IncludeTrailingPathDelimiter(PhpBasePathCurrent)+'svc-php.exe';
   configs := mmPHP.Text;
   configs := configs.Replace('%svcname%', svcNamePHP);
   configs := configs.Replace('%displayname%', vlPHP.Values['Service Display Name']);
@@ -501,8 +523,12 @@ begin
   ss := TStringList.Create;
   try
     ss.Text := configs;
-    ss.SaveToFile(IncludeTrailingPathDelimiter(PhpBasePath)+'svc-php.xml');
+    ss.SaveToFile(IncludeTrailingPathDelimiter(PhpBasePathCurrent)+'svc-php.xml');
     UpdateSvcWrapperPhp();
+    configs := IncludeTrailingPathDelimiter(PhpBasePathCurrent);
+    // generate php.ini if not exists:
+    if not FileExists(configs+'php.ini') then
+      CopyFile(PChar(configs+'php.ini-production'), PCHar(configs+'php.ini'), true);
     RunExe(svcExe, 'install', procedure(code: Integer; status: string)
     begin
       MessageDlg('Service installation: '+status, mtInformation, [mbOK], 0);
@@ -696,7 +722,7 @@ begin
     exit;
   end;
   //
-  sPath := IncludeTrailingPathDelimiter(PhpBasePath)+'svc-php.exe';
+  sPath := IncludeTrailingPathDelimiter(PhpBasePathCurrent)+'svc-php.exe';
   RunExe(sPath, 'uninstall', procedure(code: Integer; status: string)
   begin
     MessageDlg('Service uninstallation: '+status, mtInformation, [mbOK], 0);
@@ -819,6 +845,58 @@ begin
   end;
 end;
 
+procedure TfMain.ChangePhpVersion(Sender: TObject);
+var
+  curStatus,
+  curVer,
+  nextVer: string;
+  iPhp: ISuperObject;
+  curTag: Integer;
+  m: TMenuItem;
+  ss: TStringList;
+  i: integer;
+begin
+  curStatus := vlPHP.Values['Service Status'];
+  if curStatus<> 'Not Installed' then
+  begin
+    MessageDlg('PHP Service is installed. Please stop and uninstall it before change PHP version!', mtInformation, [mbOK], 0);
+    exit;
+  end;
+  m := TMenuItem(Sender);
+  curVer := m.Caption;
+  curTag := m.Tag;
+  nextVer := '';
+  for iPhp in iPhpVersions.A['versions'] do
+  begin
+    if iPhp.I['id'] = curTag  then
+    begin
+      nextVer := iPhp.S['version'];
+      break;
+    end;
+  end;
+  if nextVer = '' then
+  begin
+    MessageDlg('Invalid PHP version!', mtError, [mbOK], 0);
+    exit;
+  end;
+  if MessageDlg('Changer PHP from '+curVer+ ' to '+nextVer+'?', mtConfirmation, mbOKCancel,0) = mrOK then
+  begin
+    for i := 0 to iPhpVersions.A['versions'].Length-1 do
+      iPhpVersions.A['versions'][i].B['active'] := false;
+    ss := TStringList.Create;
+    try
+      ss.Text := iPhp.AsJSon(true);
+      ss.SaveToFile(PhpVersionFilePath);
+      PhpBasePathCurrent := iPhp.S['path'];
+      vlPHP.Values['PHP Directory'] := PhpBasePathCurrent;
+      vlPHP.Values['PHP Version'] := iPhp.S['version'];
+      m.Checked := true;
+    finally
+      ss.Free;
+    end;
+  end;
+end;
+
 function TfMain.createVhost(aHost: ISuperObject): Boolean;
 var
   vhostContent,
@@ -870,6 +948,13 @@ begin
   finally
     vhostContent.Free;
   end;
+end;
+
+procedure TfMain.d1Click(Sender: TObject);
+begin
+  MessageDlg('Please download a PHP version from'#13
+    +'https://windows.php.net/downloads/releases/archives/'#13
+    +'and extract it to .\daemon\php directory', mtInformation, [mbOK],0);
 end;
 
 procedure TfMain.DisableAllInput;
@@ -959,12 +1044,13 @@ begin
   end;
 end;
 
-function TfMain.FindBasePath: Boolean;
+function TfMain.FindNginxBasePath: Boolean;
 var
   sr: TSearchRec;
   pth, base: string;
 begin
   Result := false;
+  // find nginx:
   base := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)+'daemon');
   if FindFirst(
     base+'*.*',
@@ -982,16 +1068,146 @@ begin
           NginxBasePath := pth;
           continue;
         end;
-        if FileExists(pth+'\php-cgi.exe') then
+      end;
+    until FindNext(sr)<>0;
+    FindClose(sr);
+  end;
+  Result := DirectoryExists(NginxBasePath);
+end;
+
+function TfMain.FindPhpBasePath: Boolean;
+var
+  sr: TSearchRec;
+  pth: string;
+  iPhp,
+  iPhpCUrrent: ISuperObject;
+  ss : TStringList;
+  i: integer;
+  mi: TMenuItem;
+begin
+  Result := false;
+  // find php:
+  iPhpVersions := so('{"versions":[]}');
+  if not DirectoryExists(PhpMainPath) then exit;
+  if FindFirst(
+    PhpMainPath+PathDelim+'*.*',
+    faDirectory,
+    sr
+  ) = 0 then
+  begin
+    repeat
+      pth := sr.Name;
+      if not pth.StartsWith('.') then
+      begin
+        pth := TPath.Combine( PhpMainPath, pth);
+        if FileExists(pth+PathDelim+'php-cgi.exe') then
         begin
-          PhpBasePath := pth;
-          continue;
+          iPhp := so();
+          iPhp.S['path'] := pth;
+          iPhp.S['exePath'] := pth+PathDelim+'php-cgi.exe';
+          iPhp.B['active'] := false;
+          iPhp.S['version'] := sr.Name;
+          {
+          RunExe(pth+PathDelim+'php.exe', '-v', procedure(a: integer; b: string)
+          begin
+            if b.StartsWith('php', true) then
+            begin
+              b := copy(b, 1, pos('(',b)-1);
+              iPhp.S['version'] := b;
+            end;
+          end);
+          }
+          iPhp.I['id'] := iPhpVersions.A['versions'].Length+1;
+          iPhpVersions.A['versions'].Add(iPhp);
         end;
       end;
     until FindNext(sr)<>0;
     FindClose(sr);
   end;
-  Result := DirectoryExists(NginxBasePath) and DirectoryExists(PhpBasePath);
+  result := iPhpVersions.A['versions'].Length > 0;
+
+  acInstallPHP.Enabled := Result; // will be overriden by ProcessSCMData
+  if not Result then
+  begin
+    DeleteFile(PhpVersionFilePath);
+    exit;
+  end;
+  Randomize;
+  if not FileExists(PhpVersionFilePath) then
+  begin
+    iPhpVersions.A['versions'].O[0].B['active'] := true;
+    PhpBasePathCurrent := iPhpVersions.A['versions'].O[0].S['path'];
+    // save back to file for future use:
+    ss := TStringList.Create;
+    try
+      ss.Text := iPhpVersions.A['versions'][0].AsJSon(true);
+      ss.SaveToFile(PhpVersionFilePath);
+    finally
+      ss.Free;
+    end;
+  end
+  else
+  begin
+    // only one PHP version available, set it as default:
+
+    if iPhpVersions.A['versions'].Length=1 then
+    begin
+      iPhpVersions.A['versions'].O[0].B['active'] := true;
+      PhpBasePathCurrent := iPhpVersions.A['versions'].O[0].S['path'];
+      // save back to file for future use:
+      ss := TStringList.Create;
+      try
+        ss.Text := iPhpVersions.A['versions'][0].AsJSon(true);
+        ss.SaveToFile(PhpVersionFilePath);
+      finally
+        ss.Free;
+      end;
+    end
+    ;
+
+    for i := 0 to iPhpVersions.A['versions'].Length-1 do
+      iPhpVersions.A['versions'][i].B['active'] := false;
+    ss := TStringList.Create;
+    try
+      ss.LoadFromFile(PhpVersionFilePath);
+      iPhpCUrrent := so(ss.Text);
+      for i := 0 to iPhpVersions.A['versions'].Length-1 do
+      begin
+        iPhp := iPhpVersions.A['versions'][i];
+        if LowerCase(iPhpCUrrent.S['path']) = LowerCase(iPhp.S['path']) then
+        begin
+          iPhpVersions.A['versions'][i].B['active'] := true;
+          PhpBasePathCurrent := iPhp.S['path'];
+          break;
+        end;
+      end;
+    finally
+      ss.Free;
+    end;
+  end;
+  vlPHP.Values['PHP Directory'] := PhpBasePathCurrent;
+  // Update PHP Versions' menu:
+  vlPHP.Values['PHP Version'] := 'Unknown';
+  for i := miPhpVersion.Count-1 downto 3 do
+  begin
+    miPhpVersion.Items[i].Free;
+  end;
+  for i := 0 to iPhpVersions.A['versions'].Length-1 do
+  begin
+    iPhp := iPhpVersions.A['versions'][i];
+    mi := TMenuItem.Create(MainMenu1);
+    // mi.Parent := miPhpVersion;
+    mi.GroupIndex := 1;
+    mi.RadioItem := true;
+    mi.AutoCheck := false;
+    mi.Caption := iPhp.S['version'];
+    mi.Checked := iPhp.B['active'];
+    mi.Tag := iPhp.i['id'];
+    if mi.Checked then
+      vlPHP.Values['PHP Version'] := iPhp.S['version'];
+    mi.OnClick := ChangePhpVersion;
+    miPhpVersion.Add(mi);
+  end;
 end;
 
 function TfMain.FindHostsFilePath: String;
@@ -1046,7 +1262,12 @@ begin
   vHostsConfigPath:=
     IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)+'vhosts') +
     'vhosts.conf';
-  FindBasePath();
+  PhpMainPath := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)+'daemon');
+  PhpMainPath := TPath.Combine(PhpMainPath, 'php');
+  PhpVersionFilePath := TPath.Combine(PhpMainPath, 'php-version.conf');
+
+  FindNginxBasePath();
+  FindPhpBasePath();
   HostsFilePath := FindHostsFilePath();
   fSCM := TServiceManager.Create;
   fSCM.Active := true;
@@ -1131,6 +1352,12 @@ begin
   begin
     UpdatePhpUiState(true, SvcPhp.State)
   end;
+end;
+
+procedure TfMain.ReloadPHPVersions1Click(Sender: TObject);
+begin
+  FindPhpBasePath();
+  vlPHP.Values['PHP Directory'] := PhpBasePathCurrent;
 end;
 
 procedure TfMain.RemoveDirRecursively(const ADir: String);
@@ -1261,7 +1488,7 @@ begin
   end;
   WorkDir :=  ExtractFileDir(CommandLine);
   Parameter := PChar('"'+CommandLine + '" '+Params);
-
+  // ShowMessage(Parameter);
   Task := TTask.Create(procedure
   var
     SA: TSecurityAttributes;
@@ -1269,7 +1496,13 @@ begin
     PI: TProcessInformation;
     StdOutPipeRead,  StdOutPipeWrite: THandle;
     Handle:  Boolean;
+    Buffer: array[0..255] of  AnsiChar;
+    WasOK: Boolean;
+    BytesRead,
+    iexit: Cardinal;
+    DataRead, tmp: String;
   begin
+    DataRead := '';
     with SA do
     begin
       nLength :=  SizeOf(SA);
@@ -1292,9 +1525,20 @@ begin
         Handle :=  CreateProcess(nil{PChar( CommandLine )},  Parameter,
           nil, nil, True, 0,  nil,
           PChar(WorkDir), SI, PI);
+        CloseHandle(StdOutPipeWrite);
         if Handle then
         begin
           try
+            repeat
+              FillChar(Buffer, sizeof(Buffer),  0);
+              WasOK := ReadFile(StdOutPipeRead, Buffer, 255, BytesRead,  nil);
+              if BytesRead > 0 then
+              begin
+                Buffer[BytesRead] := #0;
+                DataRead :=  DataRead + Buffer;
+              end;
+              GetExitCodeProcess(pi.hProcess,iExit);
+            until (not WasOK ) or  (BytesRead = 0);// or (iexit <> STILL_ACTIVE);
             WaitForSingleObject(pi.hProcess, INFINITE);
           finally
             CloseHandle(PI.hThread);
@@ -1302,7 +1546,7 @@ begin
           end;
           TThread.Synchronize(TThread.Current, procedure
           begin
-            OnDone(0, 'Done');
+            OnDone(0, #13#10+dataRead);
           end);
         end
         else
@@ -1569,11 +1813,14 @@ begin
   begin
     tsPHP.ImageIndex := 0;
     vlPHP.Values['Service Status'] := 'Not Installed';
-    acInstallPHP.Enabled := true;
+    acInstallPHP.Enabled :=
+      (iPhpVersions.A['versions'].Length>0) and
+      FileExists(PhpBasePathCurrent + PathDelim + 'php-cgi.exe');
     acUninstallPHP.Enabled := false;
     acStartPHP.Enabled := false;
     acStopPHP.Enabled := false;
     acRestartPHP.Enabled := false;
+    UpdatePhpVersionMenuState(true);
   end
   else
   begin
@@ -1587,6 +1834,7 @@ begin
         acStartPHP.Enabled := true;
         acStopPHP.Enabled := false;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
       ssStartPending:
       begin
@@ -1597,6 +1845,7 @@ begin
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := true;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
       ssStopPending:
       begin
@@ -1607,6 +1856,7 @@ begin
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := false;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
       ssRunning:
       begin
@@ -1617,6 +1867,7 @@ begin
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := true;
         acRestartPHP.Enabled := true;
+        UpdatePhpVersionMenuState(false);
       end;
       ssContinuePending:
       begin
@@ -1627,6 +1878,7 @@ begin
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := true;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
       ssPausePending:
       begin
@@ -1637,6 +1889,7 @@ begin
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := false;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
       ssPaused:
       begin
@@ -1647,21 +1900,34 @@ begin
         acStartPHP.Enabled := true;
         acStopPHP.Enabled := false;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end
       else
       begin
         tsPHP.ImageIndex := 0;
         vlPHP.Values['Service Status'] := 'Waiting...';
-        acInstallNginx.Enabled := false;
+        acInstallphp.Enabled := false;
         acUninstallPHP.Enabled := false;
         acStartPHP.Enabled := false;
         acStopPHP.Enabled := true;
         acRestartPHP.Enabled := false;
+        UpdatePhpVersionMenuState(false);
       end;
     end;
   end;
   miTrayPHP.ImageIndex := tsPHP.ImageIndex;
   miTrayPHP.Caption := 'PHP    : '+vlPHP.Values['Service Status'];
+end;
+
+procedure TfMain.UpdatePhpVersionMenuState(aState: Boolean);
+var
+  mi: TMenuItem;
+  i: integer;
+begin
+  for i := miPhpVersion.Count-1 downto 3 do
+  begin
+    miPhpVersion.Enabled := aState;
+  end;
 end;
 
 procedure TfMain.UpdateStatusBar(aText: STring);
@@ -1686,7 +1952,7 @@ var
 begin
   Result := True;
   wrFile := ExtractFilePath(Application.ExeName)+'WinSW.exe';
-  wrName := IncludeTrailingPathDelimiter (PhpBasePath)+'svc-php.exe';
+  wrName := IncludeTrailingPathDelimiter (PhpBasePathCurrent)+'svc-php.exe';
   if not FileExists(wrName) then
     Result := CopyFile(PChar(wrFile), PChar(wrName), true);
 end;

@@ -76,12 +76,35 @@ Wingp uses [WinSW (Windows Service Wrapper)](https://github.com/winsw/winsw) to 
 - To start Nginx service, click on menu Nginx &raquo; Start Nginx.
 - To stop Nginx service, click on menu Nginx &raquo; Stop Nginx.
 - To Uninstall Nginx service, click on menu Nginx &raquo; Uninstall Nginx. Nginx service must be stopped first.
+
 ### PHP Service
 
-- To install Nginx service, click on menu PHP &raquo; Install PHP.
+Before you start, select a PHP version from menu PHP &raquo; PHP Version.
+- To install PHP service, click on menu PHP &raquo; Install PHP.
 - To start PHP service, click on menu PHP &raquo; Start PHP.
 - To stop PHP service, click on menu PHP &raquo; Stop PHP.
 - To Uninstall PHP service, click on menu PHP &raquo; Uninstall PHP. PHP service must be stopped first.
+
+
+## Using Multiple PHP Version
+
+Wingp supports multiple PHP Version. Only one version can be activate at a time.
+This enables you to switch among multiple PHP version for application testing.
+
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_13_51-phpinfo().png?raw=true">
+	<br>Site Running On PHP-5.6.4
+</p>
+
+
+
+<p align="center">
+	<img alt="Wingp" height="250" 
+	src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_14_57-PHPv8.0.0-phpinfo().png?raw=true">
+	<br>Site Running On PHP-8.0.0
+</p>
+
 
 
 ## Updating Nginx and PHP
@@ -105,10 +128,45 @@ To update Nginx:
 To update PHP:
 
 - Stop and then uninstall PHP service.
-- Delete the content of php directory (i.e. `.\daemon\php`).
+- Delete the content of active PHP version directory (i.e. `.\daemon\php\php-X.Y.Z`). For example, you want to update **PHP-7.4.32**, then navigate to `.\daemon\php\php-7.4.32` and delete it's content.
 - Extract and copy new PHP files into the directory.
-- Duplicate `php.ini-production` and rename the copy to `php.ini` and edit it as necessary.
+- Duplicate `php.ini-production` and rename the copy to `php.ini` and edit it as necessary. If you skip this step, Wingp will generate `php.ini` file for you, copying from `php.ini-production`
 - Re-Install PHP service.
+
+Please note that these steps are needed to update the active PHP version only. To change among PHP versions, read [Change Active PHP Version](#change-active-php-version).
+
+### Change Active PHP Version
+
+Wingp already has PHP-7.4.32 (x64, thread safe) included and activated. 
+You can install other PHP version by following these steps:
+
+- Navigate to https://windows.php.net/downloads/releases/archives/
+- Download version you need. Files with `x86` suffixes are for Windows 32bit. `x64` suffixes are for Windows 64bit. The `nts` in the file name means `non-thread-safe`, which you may want to avoid using.
+- Extract the downloaded version into `.\daemon\php` directory, keeping the default directory name. For example, `php-8.0.0-Win32-vs16-x64` is extracted to `.\daemon\php\php-8.0.0-Win32-vs16-x64` without altering the output directory name. This is important as the directory name will be used by Wingp to identify its version.
+- After the extraction, the content of `.\daemon\php` will look like this:
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_19_27-php-multiversion.png?raw=true">
+- Use menu PHP &raquo; PHP Version &raquo; Reload PHP Versions to reload available PHP version.
+
+If only one version of PHP is available, Wingp will set it as active default. If multiple version are available, Wingp will select the first one as active default. 
+To change active PHP version, follow these steps:
+
+- Stop PHP service if it is running.
+- Uninstall PHP service.
+- Use menu PHP &raquo; PHP Version &raquo; <PHP-x.y.x> to activate it.
+<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_20_52-php-selectversion.png?raw=true">	
+- Confirm the dialog asking to change PHP version.
+- Re-install PHP service. The selected PHP version will be activated and installed as service
+- Start PHP service
+
+
+You can add as many version of PHP as you want, but please note that some version may need some specific configuration. For Example, `php-5.6.4-Win32-VC11-x64` will need Visual C++ Redistributable for Visual Studio 2012  to work. Another example is PHP version 8.0.1 and above may not run on Windows 7, since they need newer `kernel32.dll`.
+These configuration, if missed, may cause PHP service fails to start. Please read PHP documentation and requirements before activating any PHP version.
+You can also test the version of PHP by running it:
+```
+CD <wingpdir>\daemon\php\php-x.y.x
+php-cgi.exe -v
+```
+ 
 
 ## Updating The Stack Manager
 
@@ -193,6 +251,12 @@ include ../../../vhosts/nginx-*.conf;
 
 Wingp doesn't need any specific configuration in `php.ini` file. Feel free to edit it as necessary. These [directives](https://www.php.net/manual/en/ini.list.php) may help.
 
+To edit `php.ini`, click on menu PHP &raquo; Edit php.ini. This will bring editor with the selected PHP version's INI file loaded. When you save, the selected PHP version's INI file will be updated, without interferencing with other version's INI file.
+
+To change INI file of other PHP versions, you need to change active PHP version first.
+
+To change active PHP version, [click here](#change-active-php-version).
+
 ### Windows *hosts* File
 
 Wingp updates Windows hosts file everytime a virtual host added or removed. Wingp only map virtual host's name to local loopback IP, for example:
@@ -269,7 +333,7 @@ Wingp was designed to aid in application development, not for production use. Wi
 
 Wingp can be used, repackaged and redistributed freely without any cost. 
 
-Wingp came with no warranty, and is not responsible for any risk and damage. If you use Wingp, the any responsibility is on you.
+Wingp came with no warranty, and is not responsible for any risk and damage. If you use Wingp, then any responsibility is on you.
 
 
 

@@ -11,7 +11,9 @@ uses
   DelphiVault.Windows.ServiceManager in 'utils\DelphiVault.Windows.ServiceManager.pas',
   uInputVhost in 'utils\uInputVhost.pas' {FInputVhost},
   uvhostDeleteOption in 'utils\uvhostDeleteOption.pas' {fvHostDeleteOption},
-  uvhostOption in 'utils\uvhostOption.pas' {fvHostOption};
+  uvhostOption in 'utils\uvhostOption.pas' {fvHostOption},
+  KaZip in 'kazip\KaZip.pas',
+  zipusekazip in 'kazip\zipusekazip.pas';
 
 {$R *.res}
 
