@@ -143,11 +143,10 @@ You can install other PHP version by following these steps:
 
 - Navigate to https://windows.php.net/downloads/releases/archives/
 - Download version you need. Files with `x86` suffixes are for Windows 32bit. `x64` suffixes are for Windows 64bit. The `nts` in the file name means `non-thread-safe`, which you may want to avoid using.
-- Extract the downloaded version into `.\daemon\php` directory, keeping the default directory name. For example, `php-8.0.0-Win32-vs16-x64` is extracted to `.\daemon\php\php-8.0.0-Win32-vs16-x64` without altering the output directory name. This is important as the directory name will be used by Wingp to identify its version.
-- After the extraction, the content of `.\daemon\php` will look like this:
-<img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_19_27-php-multiversion.png?raw=true">
+- Install the downloaded ZIP:
+	- Extract the downloaded version into `.\daemon\php` directory, keeping the default directory name. For example, `php-8.0.0-Win32-vs16-x64` is extracted to `.\daemon\php\php-8.0.0-Win32-vs16-x64` ~~without altering the output directory name. This is important as the directory name will be used by Wingp to identify its version.~~ After the extraction, the content of `.\daemon\php` will look like this: <img src="https://github.com/AndanTeknomedia/wingp/blob/main/screenshots/2024-10-06--18_19_27-php-multiversion.png?raw=true"> Use menu PHP &raquo; PHP Version &raquo; Reload PHP Versions to reload available PHP version.
 
-- Use menu PHP &raquo; PHP Version &raquo; Reload PHP Versions to reload available PHP version.
+	- Use menu PHP &raquo; Add Version. A new window will appear. Browse for the downloaded ZIP file and click Add. This will let Wingp extract the ZIP and reload installed PHP versions.
 
 If only one version of PHP is available, Wingp will set it as active default. If multiple version are available, Wingp will select the first one as active default. 
 To change active PHP version, follow these steps:
@@ -162,7 +161,7 @@ To change active PHP version, follow these steps:
 - Start PHP service
 
 
-You can add as many version of PHP as you want, but please note that some version may need some specific configuration. For Example, `php-5.6.4-Win32-VC11-x64` will need Visual C++ Redistributable for Visual Studio 2012  to work. Another example is PHP version 8.0.1 and above may not run on Windows 7, since they need newer `kernel32.dll`.
+You can add as many version of PHP as you want, but please note that some version may need specific configuration. For Example, `php-5.6.4-Win32-VC11-x64` will need Visual C++ Redistributable for Visual Studio 2012  to work. Another example is PHP version 8.0.1 and above may not run on Windows 7, since they need newer `kernel32.dll`.
 These configuration, if missed, may cause PHP service fails to start. Please read PHP documentation and requirements before activating any PHP version.
 You can also test the version of PHP by running it:
 ```

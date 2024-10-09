@@ -515,23 +515,6 @@ object fMain: TfMain
       object N8: TMenuItem
         Caption = '-'
       end
-      object miPhpVersion: TMenuItem
-        Caption = 'PHP Version'
-        object d1: TMenuItem
-          Caption = 'Add Version...'
-          OnClick = d1Click
-        end
-        object ReloadPHPVersions1: TMenuItem
-          Caption = 'Reload PHP Versions'
-          OnClick = ReloadPHPVersions1Click
-        end
-        object N9: TMenuItem
-          Caption = '-'
-        end
-      end
-      object N3: TMenuItem
-        Caption = '-'
-      end
       object acStartPHP1: TMenuItem
         Action = acStartPHP
       end
@@ -540,6 +523,23 @@ object fMain: TfMain
       end
       object acRestartPHP1: TMenuItem
         Action = acRestartPHP
+      end
+      object N3: TMenuItem
+        Caption = '-'
+      end
+      object miPhpVersion: TMenuItem
+        Caption = 'PHP Version'
+        object miAddPhpVersion: TMenuItem
+          Caption = 'Add Version...'
+          OnClick = miAddPhpVersionClick
+        end
+        object ReloadPHPVersions1: TMenuItem
+          Caption = 'Reload PHP Versions'
+          OnClick = ReloadPHPVersions1Click
+        end
+        object N9: TMenuItem
+          Caption = '-'
+        end
       end
       object N4: TMenuItem
         Caption = '-'
@@ -750,7 +750,7 @@ object fMain: TfMain
     Left = 346
     Top = 26
     Bitmap = {
-      494C0101A0008006800610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101A0008406840610001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009002000001002000000000000090
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

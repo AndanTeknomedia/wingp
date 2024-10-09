@@ -17,6 +17,20 @@ const
   VALID_IPV6_CHARS = ['0'..'9', 'a'..'f', '.'];
   HOSTS_WHITESPACE_CHARS = [' ', #9];
 type
+  TEXEVersionData = record
+    CompanyName,
+    FileDescription,
+    FileVersion,
+    InternalName,
+    LegalCopyright,
+    LegalTrademarks,
+    OriginalFileName,
+    ProductName,
+    ProductVersion,
+    Comments,
+    PrivateBuild,
+    SpecialBuild: string;
+  end;
   TOnRunExeCallback = TProc<Integer, String>;
   TfMain = class(TForm)
     MainMenu1: TMainMenu;
@@ -110,7 +124,7 @@ type
     miTrayPHP: TMenuItem;
     N8: TMenuItem;
     miPhpVersion: TMenuItem;
-    d1: TMenuItem;
+    miAddPhpVersion: TMenuItem;
     ReloadPHPVersions1: TMenuItem;
     N9: TMenuItem;
     procedure acMinimizeExecute(Sender: TObject);
@@ -141,8 +155,8 @@ type
     procedure acDeleteVHostsExecute(Sender: TObject);
     procedure acEditVhostExecute(Sender: TObject);
     procedure acEditHostsFileExecute(Sender: TObject);
-    procedure d1Click(Sender: TObject);
     procedure ReloadPHPVersions1Click(Sender: TObject);
+    procedure miAddPhpVersionClick(Sender: TObject);
   private
     { Private declarations }
     RunAsAdmin: Boolean;
@@ -198,6 +212,11 @@ type
     procedure DisableAllInput;
     procedure RestoreAllInput;
     procedure ChangePhpVersion(Sender: TObject);
+    procedure doAddPhpVersionFromZipFile(const AZipFile: string);
+    function  GetExeVersionDataInfo(AExeFile: string): TEXEVersionData;
+
+    // KaZip decompression event handler:
+    procedure _OnDecompressFile(Sender: TObject; current, total: integer);
 
   public
     { Public declarations }
@@ -214,7 +233,7 @@ implementation
 
 {$R *.dfm}
 
-uses uInputVhost, uvhostOption, uvhostDeleteOption, KaZip;
+uses uInputVhost, uvhostOption, uvhostDeleteOption, KaZip, uAddPhpOptions;
 
 procedure TfMain.acAddVHostExecute(Sender: TObject);
 var
@@ -856,13 +875,14 @@ var
   ss: TStringList;
   i: integer;
 begin
+  m := TMenuItem(Sender);
+  if m.Checked then exit;
   curStatus := vlPHP.Values['Service Status'];
   if curStatus<> 'Not Installed' then
   begin
     MessageDlg('PHP Service is installed. Please stop and uninstall it before change PHP version!', mtInformation, [mbOK], 0);
     exit;
   end;
-  m := TMenuItem(Sender);
   curVer := m.Caption;
   curTag := m.Tag;
   nextVer := '';
@@ -950,11 +970,21 @@ begin
   end;
 end;
 
-procedure TfMain.d1Click(Sender: TObject);
+procedure TfMain.miAddPhpVersionClick(Sender: TObject);
+var
+  F: TFaddPhpVersion;
 begin
-  MessageDlg('Please download a PHP version from'#13
-    +'https://windows.php.net/downloads/releases/archives/'#13
-    +'and extract it to .\daemon\php directory', mtInformation, [mbOK],0);
+  f := TFaddPhpVersion.Create( Application );
+  try
+    f.Tag := mrNone;
+    f.ShowModal;
+    if F.Tag = mrOk then
+    begin
+      doAddPhpVersionFromZipFile(f.eZip.Text);
+    end;
+  finally
+    f.Free;
+  end;
 end;
 
 procedure TfMain.DisableAllInput;
@@ -965,6 +995,78 @@ begin
   begin
     ActionManager1.Actions[i].Tag := Integer(ActionManager1.Actions[i].Enabled);
     ActionManager1.Actions[i].Enabled := false;
+  end;
+end;
+
+procedure TfMain.doAddPhpVersionFromZipFile(const AZipFile: string);
+var
+  zk: TKAZip;
+  i, idx: integer;
+  fname,
+  testPath,
+  targetDir,
+  version,
+  lcVersion: string;
+  iPhp: ISuperObject;
+  alreadyAdded: Boolean;
+begin
+  fname := 'php-cgi.exe';
+  testPath := TempFileName();
+  zk := TKAZip.Create(self);
+  try
+    zk.Open(AZipFile);
+    zk.OverwriteAction := oaOverwriteAll;
+    idx := zk.Entries.IndexOf(fname);
+    if idx < 0 then
+      MessageDlg('This file: '+AZipFile+' is not PHP Zip file.', mtInformation, [mbOK],0);
+
+    zk.Entries.Items[idx] .ExtractToFile(testPath);
+    // zk.Entries.ExtractAll('C:\wingp.stack\tmp');
+    with GetExeVersionDataInfo(testPath) do
+    begin
+      version := ProductName+'-'+ProductVersion;
+    end;;
+
+    //
+    lcVersion := LowerCase(version);
+    alreadyAdded := false;
+    for i := 0 to iPhpVersions.A['versions'].Length-1 do
+    begin
+      iPhp := iPhpVersions.A['versions'][i];
+      if lcVersion = LowerCase(iPhp.S['version']) then
+      begin
+        alreadyAdded := true;
+        break;
+      end;
+    end;
+
+    {TODO: cannot process bzip2 compression!}
+    if alreadyAdded then
+    begin
+      MessageDlg('This version: '+version+' has already been installed.', mtInformation, [mbOK],0);
+    end
+    else
+    begin
+      targetDir := TPath.Combine(PhpMainPath , lcVersion);
+      if not DirectoryExists(targetDir) then
+        ForceDirectories(targetDir);
+      zk.OnDecompressFile := _OnDecompressFile;
+      zk.ExtractAll(targetDir);
+      StatusBar1.Panels[0].Text := 'Done.';
+      ReloadPHPVersions1.Click;
+      {
+      // or:
+      FindPhpBasePath();
+      vlPHP.Values['PHP Directory'] := PhpBasePathCurrent;
+      }
+    end;
+    //
+
+    zk.Close;
+  finally
+    zk.Free;
+    if FileExists(testPath) then
+      DeleteFile(testPath);
   end;
 end;
 
@@ -1106,7 +1208,15 @@ begin
           iPhp.S['path'] := pth;
           iPhp.S['exePath'] := pth+PathDelim+'php-cgi.exe';
           iPhp.B['active'] := false;
-          iPhp.S['version'] := sr.Name;
+          // iPhp.S['version'] := sr.Name;
+          with GetExeVersionDataInfo(pth+PathDelim+'php-cgi.exe') do
+          begin
+            if ProductVersion <> '' then
+              iPhp.S['version'] := ProductName+'-'+ProductVersion
+            else
+              iPhp.S['version'] := sr.Name { fallback to folder name}
+            ;
+          end;
           {
           RunExe(pth+PathDelim+'php.exe', '-v', procedure(a: integer; b: string)
           begin
@@ -1279,6 +1389,76 @@ end;
 procedure TfMain.FormDestroy(Sender: TObject);
 begin
   fSCM.Free;
+end;
+
+function TfMain.GetExeVersionDataInfo(AExeFile: string): TEXEVersionData;
+type
+  PLandCodepage = ^TLandCodepage;
+  TLandCodepage = record
+    wLanguage,
+    wCodePage: word;
+  end;
+var
+  dummy,
+  len: cardinal;
+  buf, pntr: pointer;
+  lang: string;
+begin
+  with Result do
+  begin
+    CompanyName         := '';
+    FileDescription     := '';
+    FileVersion         := '';
+    InternalName        := '';
+    LegalCopyright      := '';
+    LegalTrademarks     := '';
+    OriginalFileName    := '';
+    ProductName         := '';
+    ProductVersion      := '';
+    Comments            := '';
+    PrivateBuild        := '';
+    SpecialBuild        := '';
+  end;
+  len := GetFileVersionInfoSize(PChar(AExeFile), dummy);
+  if len = 0 then
+    exit;
+  GetMem(buf, len);
+  try
+    if not GetFileVersionInfo(PChar(AExeFile), 0, len, buf) then
+      RaiseLastOSError;
+
+    if not VerQueryValue(buf, '\VarFileInfo\Translation\', pntr, len) then
+      RaiseLastOSError;
+
+    lang := Format('%.4x%.4x', [PLandCodepage(pntr)^.wLanguage, PLandCodepage(pntr)^.wCodePage]);
+
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\CompanyName'), pntr, len){ and (@len <> nil)} then
+      result.CompanyName := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\FileDescription'), pntr, len){ and (@len <> nil)} then
+      result.FileDescription := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\FileVersion'), pntr, len){ and (@len <> nil)} then
+      result.FileVersion := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\InternalName'), pntr, len){ and (@len <> nil)} then
+      result.InternalName := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\LegalCopyright'), pntr, len){ and (@len <> nil)} then
+      result.LegalCopyright := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\LegalTrademarks'), pntr, len){ and (@len <> nil)} then
+      result.LegalTrademarks := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\OriginalFileName'), pntr, len){ and (@len <> nil)} then
+      result.OriginalFileName := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\ProductName'), pntr, len){ and (@len <> nil)} then
+      result.ProductName := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\ProductVersion'), pntr, len){ and (@len <> nil)} then
+      result.ProductVersion := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\Comments'), pntr, len){ and (@len <> nil)} then
+      result.Comments := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\PrivateBuild'), pntr, len){ and (@len <> nil)} then
+      result.PrivateBuild := PChar(pntr);
+    if VerQueryValue(buf, PChar('\StringFileInfo\' + lang + '\SpecialBuild'), pntr, len){ and (@len <> nil)} then
+      result.SpecialBuild := PChar(pntr);
+  finally
+    FreeMem(buf);
+  end;
 end;
 
 function TfMain.isSvcNginxInstalled: Boolean;
@@ -1960,6 +2140,11 @@ end;
 function TfMain.vHostExists(aHost: ISuperObject): Boolean;
 begin
   Result := vHostExists(aHost.S['name']);
+end;
+
+procedure TfMain._OnDecompressFile(Sender: TObject; current, total: integer);
+begin
+  StatusBar1.Panels[0].Text := Format('Extracting %d of %d',[current, total]);
 end;
 
 function TfMain.vHostExists(const aHostName: String): Boolean;

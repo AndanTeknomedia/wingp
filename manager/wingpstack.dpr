@@ -13,7 +13,8 @@ uses
   uvhostDeleteOption in 'utils\uvhostDeleteOption.pas' {fvHostDeleteOption},
   uvhostOption in 'utils\uvhostOption.pas' {fvHostOption},
   KaZip in 'kazip\KaZip.pas',
-  zipusekazip in 'kazip\zipusekazip.pas';
+  zipusekazip in 'kazip\zipusekazip.pas',
+  uAddPhpOptions in 'utils\uAddPhpOptions.pas' {FaddPhpVersion};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Wingp Stack Manager';
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TFaddPhpVersion, FaddPhpVersion);
   Application.Run;
 end.
